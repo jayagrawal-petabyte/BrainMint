@@ -1,0 +1,376 @@
+/* All selectors are namespaced under .services-page so this plain stylesheet
+   cannot collide with global styles or other pages. */
+/* Pink CTA colour is estimated from the Figma screenshot — confirm the exact hex in Figma. */
+.services-page {
+  --service-cta: #d6246e;
+  --service-cta-dark: #b81d5c;
+  --service-glow: 0 12px 40px rgba(124, 106, 247, 0.22);
+  --service-glow-hover: 0 16px 48px rgba(124, 106, 247, 0.32);
+
+  position: relative;
+  overflow-x: hidden; /* clips the left-edge brain that extends off-screen */
+  background: #ffffff;
+  padding-bottom: var(--space-20);
+}
+
+/* ── Left-edge geometric brain (same placement pattern as HomePage) ── */
+
+.services-page__brain-wrap {
+  position: absolute;
+  left: -266px;
+  top: 173px;
+  width: 560px;
+  transform: rotate(-96deg);
+  transform-origin: center center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.services-page__brain-img {
+  width: 100%;
+  height: auto;
+}
+
+/* ── Content ── */
+
+.services-page__content {
+  position: relative;
+  z-index: 1;
+  padding-top: var(--space-8);
+}
+
+/* ── Back button + intro ── */
+
+.services-page__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--service-cta);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text-inverted);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.services-page__back:hover {
+  background: var(--service-cta-dark);
+  transform: translateX(-2px);
+}
+
+.services-page__back-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.services-page__intro {
+  max-width: 760px;
+  margin: var(--space-4) auto var(--space-12);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  text-align: center;
+  color: var(--color-text-body); /* muted grey is ~4.4:1 on white, below AA */
+}
+
+/* ── Showcase: heading in the middle, service cards scattered around it ── */
+
+.services-page__showcase {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--space-8);
+  row-gap: var(--space-10);
+  align-items: stretch;
+}
+
+.services-page__title {
+  grid-column: 2 / 4;
+  grid-row: 1;
+  align-self: center;
+  text-align: center;
+}
+
+.services-page__eyebrow {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-semibold);
+  color: var(--service-cta);
+}
+
+.services-page__heading {
+  margin-top: var(--space-1);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-semibold);
+  color: #111827;
+}
+
+/* The <ul> keeps its list semantics but lets the <li>s sit directly on the grid */
+.services-page__tiles {
+  display: contents;
+}
+
+.services-page__tiles > li {
+  min-width: 0;
+}
+
+.services-page__tiles > li:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.services-page__tiles > li:nth-child(2) {
+  grid-column: 4;
+  grid-row: 1;
+  transform: translateY(-8px); /* the Figma design sits this card slightly higher */
+}
+
+.services-page__tiles > li:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.services-page__tiles > li:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.services-page__tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  height: 100%;
+  padding: var(--space-6) var(--space-4);
+  background: #ffffff;
+  border: 2px solid transparent;
+  border-radius: var(--radius-card);
+  box-shadow: var(--service-glow);
+  text-align: center;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.services-page__tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--service-glow-hover);
+}
+
+.services-page__tile[aria-pressed='true'] {
+  border-color: var(--color-card-lavender-accent);
+}
+
+.services-page__tile-illustration {
+  display: block; /* it is a <span>; inline boxes ignore width */
+  flex: none;
+  width: 200px;
+  max-width: 100%;
+}
+
+/* Illustration images scale to their container and never overflow.
+   multiply drops the white image background so it blends with any surface. */
+.services-page__tile-illustration img,
+.services-page__detail-illustration img {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.services-page__tile-title {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+/* ── Selected service card ── */
+
+.services-page__detail {
+  position: relative;
+  margin-top: var(--space-16);
+  padding: var(--space-8);
+  background: #ffffff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--service-glow);
+}
+
+.services-page__detail-illustration {
+  position: absolute;
+  top: -72px;
+  right: var(--space-8);
+  width: 170px;
+}
+
+.services-page__detail-title {
+  padding-right: 190px; /* keeps the title clear of the illustration */
+  font-size: var(--text-2xl);
+  overflow-wrap: break-word;
+}
+
+.services-page__detail-description {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--color-text-body);
+}
+
+.services-page__detail-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-8);
+}
+
+.services-page__request-button {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-6);
+  background: var(--service-cta);
+  border-radius: var(--radius-md);
+  color: var(--color-text-inverted);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.services-page__request-button:hover {
+  background: var(--service-cta-dark);
+  transform: translateY(-2px);
+}
+
+/* ── Scroll-to-top control ── */
+
+.services-page__scroll-top {
+  position: fixed;
+  right: var(--space-6);
+  bottom: var(--space-6);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text-inverted);
+  transition: background var(--transition-fast);
+}
+
+.services-page__scroll-top:hover {
+  background: var(--color-primary-dark);
+}
+
+.services-page__scroll-top-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1280px) {
+  .services-page__brain-wrap {
+    width: 460px;
+    left: -226px;
+    top: 143px;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Heading on top, then the four cards in a 2×2 grid */
+  .services-page__showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-4);
+    row-gap: var(--space-4);
+  }
+
+  .services-page__title {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-bottom: var(--space-4);
+  }
+
+  .services-page__tiles > li:nth-child(n) {
+    grid-column: auto;
+    grid-row: auto;
+    transform: none;
+  }
+
+  .services-page__brain-wrap {
+    left: -160px;
+    width: 240px;
+    top: 60px;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-page__content {
+    padding-top: var(--space-6);
+  }
+
+  .services-page__intro {
+    margin-bottom: var(--space-8);
+  }
+
+  .services-page__eyebrow {
+    font-size: var(--text-xl);
+  }
+
+  .services-page__heading {
+    font-size: var(--text-2xl);
+  }
+
+  .services-page__tile-illustration {
+    width: 140px;
+  }
+
+  .services-page__detail {
+    margin-top: var(--space-12);
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .services-page__detail-illustration {
+    top: -48px;
+    right: var(--space-5);
+    width: 110px;
+  }
+
+  .services-page__detail-title {
+    padding-right: 120px;
+    font-size: var(--text-xl);
+  }
+
+  .services-page__detail-footer {
+    justify-content: stretch;
+  }
+
+  .services-page__request-button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .services-page__brain-wrap {
+    left: -200px;
+    width: 200px;
+  }
+
+  .services-page {
+    padding-bottom: var(--space-12);
+  }
+}
+
+@media (max-width: 400px) {
+  .services-page__showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .services-page__brain-wrap {
+    display: none;
+  }
+}
