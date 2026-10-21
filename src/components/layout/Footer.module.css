@@ -1,170 +1,92 @@
-/* Footer.module.css — BrainMint Footer */
-
 .footer {
-  background: var(--color-bg-secondary);
-  border-top: 1px solid var(--color-border);
+  background: #fff0e9;
 }
 
-/* ── Four-column grid ─────────────────────────── */
 .inner {
   display: grid;
-  grid-template-columns: 2.2fr 1fr 1fr 1.2fr;
-  gap: var(--space-10);
-  padding-block: var(--space-16);
-  align-items: start;
+  grid-template-columns: 1.35fr 0.85fr 0.9fr;
+  gap: 70px;
+  min-height: 180px;
+  padding-block: 14px 24px;
 }
 
-/* ── Brand column ─────────────────────────────── */
-.brand {
+.column {
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 12px;
+  color: #111111;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.detail {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 13px;
+  color: #111111;
+  font-size: 0.65rem;
+  line-height: 1.25;
 }
 
-.logoImg {
-  height: 44px;
-  width: auto;
-  max-width: 200px;
+.detail a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.detailIcon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
   object-fit: contain;
-  display: block;
 }
 
-.description {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  line-height: 1.75;
-  max-width: 300px;
-}
-
-/* Social buttons */
 .socials {
   display: flex;
-  gap: var(--space-3);
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 17px;
+  padding-top: 0;
 }
 
-.socialBtn {
-  display: flex;
+.socialLink {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  transition:
-    background var(--transition-fast),
-    border-color var(--transition-fast),
-    transform var(--transition-fast);
+  transition: transform 150ms ease;
 }
 
-.socialBtn:hover {
-  background: var(--color-brand-orange);
-  border-color: var(--color-brand-orange);
+.socialLink:hover {
   transform: translateY(-2px);
 }
 
-.socialIcon {
-  width: 15px;
-  height: 15px;
-  filter: invert(0.4);
-  transition: filter var(--transition-fast);
+.socialLink img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
 }
 
-.socialBtn:hover .socialIcon {
-  filter: invert(1) brightness(2);
-}
-
-/* ── Link group columns ───────────────────────── */
-.linkGroup {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.groupTitle {
-  font-size: var(--text-sm);
-  font-weight: var(--fw-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--color-text);
-  margin-bottom: var(--space-2);
-}
-
-.footerLink {
-  display: block;
-  padding-block: 3px;
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  font-style: normal;
-  transition: color var(--transition-fast);
-}
-
-.footerLink:hover {
-  color: var(--color-brand-orange);
-}
-
-/* ── Contact ──────────────────────────────────── */
-.contactList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  font-style: normal;
-}
-
-.contactItem {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.contactLabel {
-  font-size: var(--text-xs);
-  font-weight: var(--fw-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-text);
-}
-
-/* ── Bottom bar ───────────────────────────────── */
-.bottomBar {
-  border-top: 1px solid var(--color-border);
-  padding-block: var(--space-5);
-}
-
-.copyright {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  text-align: center;
-}
-
-/* ── Responsive ───────────────────────────────── */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .inner {
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
+    gap: 24px;
   }
 
-  .brand {
+  .column:first-child {
     grid-column: 1 / -1;
-    flex-direction: row;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: var(--space-8);
-  }
-
-  .description {
-    max-width: 400px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 480px) {
   .inner {
     grid-template-columns: 1fr;
-    gap: var(--space-8);
+    gap: 18px;
+    padding-inline: 24px;
   }
 
-  .brand {
-    flex-direction: column;
+  .column:first-child {
+    grid-column: auto;
   }
 }

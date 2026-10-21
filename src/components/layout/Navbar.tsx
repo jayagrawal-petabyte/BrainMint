@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import brainSymbol from '../../assets/brand/brainmint-logo.png'
-import facebookSvg from '../../assets/icons/facebook.svg'
-import twitterSvg from '../../assets/icons/twitter.svg'
-import linkedinSvg from '../../assets/icons/linkedin.svg'
+import facebookIcon from '../../assets/contact/Link - Facebook.png'
+import twitterIcon from '../../assets/contact/Link - Twitter_margin.png'
+import linkedinIcon from '../../assets/contact/LinkedIn_margin.png'
 import styles from './Navbar.module.css'
 
 const NAV_LINKS = [
@@ -16,9 +16,9 @@ const NAV_LINKS = [
 ]
 
 const SOCIAL_LINKS = [
-  { label: 'Facebook', href: '#', icon: facebookSvg },
-  { label: 'Twitter',  href: '#', icon: twitterSvg  },
-  { label: 'LinkedIn', href: '#', icon: linkedinSvg },
+  { label: 'Facebook', href: '#', icon: facebookIcon },
+  { label: 'Twitter',  href: '#', icon: twitterIcon  },
+  { label: 'LinkedIn', href: '#', icon: linkedinIcon },
 ]
 
 function Chevron() {

@@ -1,0 +1,230 @@
+.page {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  min-height: 620px;
+  margin: 0 auto;
+  padding: 24px 24px 64px;
+}
+
+.brainDecoration {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  width: 311px;
+  height: 723px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.brainDecoration img {
+  width: 311px;
+  max-width: none;
+  height: 723px;
+  object-fit: contain;
+  transform: none;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-left: 36px;
+  border-radius: 50%;
+  background: #df638c;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 12%);
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.backButton:hover {
+  background: #d54878;
+  transform: translateX(-2px);
+}
+
+.intro {
+  margin: -2px auto 34px;
+  text-align: center;
+  color: #111111;
+}
+
+.intro h1 {
+  margin: 0 0 2px;
+  color: #ed6b2d;
+  font-size: clamp(1.75rem, 3vw, 2.15rem);
+  font-weight: 700;
+}
+
+.intro p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.formSection {
+  width: min(100%, 910px);
+  min-height: 150px;
+  margin-left: auto;
+  padding: 15px 38px 28px;
+  border: 1px solid #888888;
+  border-radius: 25px;
+  background: #ffffff;
+  box-shadow: -8px 8px 24px rgb(255 125 61 / 34%);
+}
+
+.formSection h2 {
+  margin: 0 0 12px;
+  color: #111111;
+  font-size: 1.25rem;
+}
+
+.form,
+.formGrid {
+  display: grid;
+  gap: 14px 20px;
+}
+
+.formGrid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  border: 1px solid #26bd58;
+  border-radius: 12px;
+  padding: 10px 19px;
+  color: #333333;
+  font-size: 0.75rem;
+  outline: none;
+}
+
+.form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: #df638c;
+  box-shadow: 0 0 0 3px rgb(223 99 140 / 15%);
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: #777777;
+}
+
+.submitButton,
+.exploreButton {
+  justify-self: center;
+  min-width: 270px;
+  margin-top: 30px;
+  padding: 11px 24px;
+  border: 1px solid #4f22ba;
+  border-radius: 12px;
+  background: #10bd3c;
+  color: #ffffff;
+  font-size: 0.8rem;
+  transition: filter 150ms ease, transform 150ms ease;
+}
+
+.submitButton:hover,
+.exploreButton:hover {
+  filter: brightness(0.94);
+  transform: translateY(-1px);
+}
+
+.confirmation {
+  min-height: 76px;
+  padding: 10px 14px;
+  color: #707070;
+  font-size: 0.95rem;
+}
+
+.thanks {
+  margin-top: 34px;
+  text-align: center;
+}
+
+.thanks h2 {
+  margin: 0;
+  color: #111111;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+}
+
+.exploreButton {
+  margin-top: 22px;
+}
+
+.scrollTop {
+  position: absolute;
+  right: 12px;
+  bottom: 18px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #ff681f;
+  color: #ffffff;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.scrollTop:hover {
+  background: #e85816;
+}
+
+@media (max-width: 700px) {
+  .main {
+    min-height: 680px;
+    padding-inline: 16px;
+  }
+
+  .brainDecoration {
+    left: 0;
+    opacity: 0.8;
+  }
+
+  .backButton {
+    margin-left: 0;
+  }
+
+  .intro {
+    margin-top: 20px;
+  }
+
+  .intro p {
+    padding-inline: 20px;
+    font-size: 0.85rem;
+  }
+
+  .formSection {
+    padding: 18px 18px 26px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .submitButton,
+  .exploreButton {
+    width: 100%;
+    min-width: 0;
+  }
+}
