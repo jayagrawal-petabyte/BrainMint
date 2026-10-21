@@ -1,52 +1,38 @@
-/* =============================================
-   BrainMint — Design Tokens / CSS Variables
-   Brand: Software Consultancy
-   Colours sourced from prompt spec and Figma thumbnail.
-   ============================================= */
-
 :root {
-  /* --- Brand Identity --- */
-  --color-brand-blue: #4f6ef7;       /* BrainMint logo blue */
-  --color-brand-purple: #9b59b6;     /* BrainMint logo purple */
-  --color-brand-orange: #ff6b35;     /* Primary CTA / active nav */
-  --color-brand-cyan: #00bcd4;       /* BrainMint logo cyan accent */
+  --color-brand-blue: #4f6ef7;
+  --color-brand-purple: #9b59b6;
+  --color-brand-orange: #ff6b35;
+  --color-brand-cyan: #00bcd4;
 
-  /* --- Primary Actions (orange) --- */
   --color-primary: #ff6b35;
   --color-primary-dark: #e85d2a;
   --color-primary-light: #fff0eb;
 
-  /* --- Secondary / Link (purple-blue) --- */
   --color-secondary: #4f6ef7;
   --color-secondary-dark: #3a58e0;
   --color-secondary-light: #eef1ff;
 
-  /* --- Backgrounds --- */
   --color-bg: #ffffff;
   --color-bg-secondary: #f8f9fc;
-  --color-bg-dark: #1a1a2e;          /* Dark footer if used */
+  --color-bg-dark: #1a1a2e;
   --color-surface: #f4f5f7;
   --color-border: #e8e9ec;
 
-  /* --- Text --- */
-  --color-text: #222222;             /* Near-black headings */
-  --color-text-body: #4a4a4a;        /* Dark gray body */
-  --color-text-muted: #7a7a8a;       /* Secondary text */
+  --color-text: #222222;
+  --color-text-body: #4a4a4a;
+  --color-text-muted: #7a7a8a;
   --color-text-inverted: #ffffff;
 
-  /* --- Pastel Card Backgrounds --- */
-  --color-card-lavender: #f0edff;    /* Card 01 — Proven Experience */
-  --color-card-pink:     #fff0f3;    /* Card 02 — Collaborative Team */
-  --color-card-yellow:   #fffbeb;    /* Card 03 — Client-Centric */
-  --color-card-blue:     #edf5ff;    /* Card 04 — Innovation & Growth */
+  --color-card-lavender: #f0edff;
+  --color-card-pink:     #fff0f3;
+  --color-card-yellow:   #fffbeb;
+  --color-card-blue:     #edf5ff;
 
-  /* --- Card Icon accent colours --- */
   --color-card-lavender-accent: #7c6af7;
   --color-card-pink-accent:     #f06292;
   --color-card-yellow-accent:   #f9a825;
   --color-card-blue-accent:     #1976d2;
 
-  /* --- Spacing scale (4-pt grid) --- */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -60,20 +46,19 @@
   --space-20: 80px;
   --space-24: 96px;
 
-  /* --- Typography --- */
   --font-sans: 'Poppins', 'Inter', system-ui, sans-serif;
   --font-heading: 'Poppins', 'Inter', system-ui, sans-serif;
 
-  --text-xs:   0.75rem;    /* 12px */
-  --text-sm:   0.875rem;   /* 14px */
-  --text-base: 1rem;       /* 16px */
-  --text-lg:   1.125rem;   /* 18px */
-  --text-xl:   1.25rem;    /* 20px */
-  --text-2xl:  1.5rem;     /* 24px */
-  --text-3xl:  1.875rem;   /* 30px */
-  --text-4xl:  2.25rem;    /* 36px */
-  --text-5xl:  3rem;       /* 48px */
-  --text-6xl:  3.5rem;     /* 56px */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.5rem;
 
   --fw-regular:  400;
   --fw-medium:   500;
@@ -81,11 +66,9 @@
   --fw-bold:     700;
   --fw-extrabold: 800;
 
-  /* --- Layout --- */
   --container-max: 1200px;
   --navbar-height: 72px;
 
-  /* --- Borders & Radius --- */
   --radius-sm:   6px;
   --radius-md:   10px;
   --radius-lg:   16px;
@@ -93,14 +76,12 @@
   --radius-card: 20px;
   --radius-full: 9999px;
 
-  /* --- Shadows --- */
   --shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
   --shadow-navbar: 0 2px 12px rgba(0,0,0,0.08);
 
-  /* --- Transitions --- */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;

@@ -33,7 +33,6 @@ export default function Footer() {
     <footer className={styles.footer} aria-label="Site footer">
       <div className={`container ${styles.inner}`}>
 
-        {/* ── Brand column ────────────────── */}
         <div className={styles.brand}>
           <Link to="/" aria-label="BrainMint home">
             <img src={logoImg} alt="BrainMint — Guiding You to a World of Education" className={styles.logoImg} />
@@ -59,7 +58,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Navigation links ────────────── */}
         <nav aria-label="Footer navigation" className={styles.linkGroup}>
           <h3 className={styles.groupTitle}>Navigation</h3>
           <ul role="list">
@@ -73,7 +71,6 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* ── Services links ──────────────── */}
         <nav aria-label="Footer services" className={styles.linkGroup}>
           <h3 className={styles.groupTitle}>Services</h3>
           <ul role="list">
@@ -87,11 +84,9 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* ── Contact info ────────────────── */}
         <div className={styles.linkGroup}>
           <h3 className={styles.groupTitle}>Contact</h3>
           <address className={styles.contactList}>
-            {/* Placeholder contact info — update with real data when available */}
             <p className={styles.contactItem}>
               <span className={styles.contactLabel}>Email:</span>
               <a href="mailto:hello@brainmint.in" className={styles.footerLink}>
@@ -106,7 +101,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Bottom bar ──────────────────── */}
       <div className={styles.bottomBar}>
         <div className="container">
           <p className={styles.copyright}>

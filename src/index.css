@@ -1,9 +1,3 @@
-/* =============================================
-   BrainMint — Global entry styles
-   Import order: Google Fonts → tokens → reset → utilities
-   ============================================= */
-
-/* Poppins — primary font (weights 400, 500, 600, 700, 800) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 @import './styles/variables.css';

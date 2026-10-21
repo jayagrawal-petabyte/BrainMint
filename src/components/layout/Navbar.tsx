@@ -6,7 +6,6 @@ import twitterSvg from '../../assets/icons/twitter.svg'
 import linkedinSvg from '../../assets/icons/linkedin.svg'
 import styles from './Navbar.module.css'
 
-/* Nav links — chevron flags for Service, Project, Pages (per screenshot) */
 const NAV_LINKS = [
   { label: 'Home',       to: '/',         hasDropdown: false },
   { label: 'About',      to: '/about',    hasDropdown: false },
@@ -22,7 +21,6 @@ const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: '#', icon: linkedinSvg },
 ]
 
-/* Chevron icon */
 function Chevron() {
   return (
     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true" className={styles.chevron}>
@@ -40,7 +38,6 @@ export default function Navbar() {
         className={`container ${styles.inner}`}
         aria-label="Main navigation"
       >
-        {/* ── Logo: brain symbol + wordmark text ── */}
         <Link to="/" className={styles.logo} aria-label="BrainMint — go to home page">
           <img
             src={brainSymbol}
@@ -54,7 +51,6 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* ── Desktop navigation ── */}
         <ul className={styles.navLinks} role="list">
           {NAV_LINKS.map((link) => (
             <li key={link.label}>
@@ -79,7 +75,6 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* ── Social icon buttons (pale-blue circles) ── */}
         <div className={styles.socials} aria-label="Social media links">
           {SOCIAL_LINKS.map((s) => (
             <a
@@ -95,7 +90,6 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* ── Mobile hamburger ── */}
         <button
           className={styles.hamburger}
           type="button"
@@ -110,7 +104,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* ── Mobile drawer ── */}
       <div
         id="mobile-nav"
         className={[styles.mobileMenu, menuOpen ? styles.mobileMenuOpen : ''].join(' ')}

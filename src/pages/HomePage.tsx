@@ -3,35 +3,18 @@ import teamCollaboration from '../assets/brand/team-collaboration.png'
 import brainSymbol from '../assets/brand/brainmint-symbol.png'
 import styles from './HomePage.module.css'
 
-/* ─────────────────────────────────────────────────
-   HOME PAGE — matches "Why choose us? (Harishma)"
-   reference screenshot exactly.
 
-   Sections:
-   1. Hero (eyebrow + headline + sub + image)
-   2. Feature cards (4 cards, no CTA button)
-   ───────────────────────────────────────────────── */
 
-/* ──────────────────────────────────────────────────
-   CARD SVG ILLUSTRATIONS
-   Match the reference 3D-style icons.
-   ────────────────────────────────────────────────── */
 
-/** Card 01 — Proven Experience: layered UI cards/screens */
 function IllustrationProvenExperience() {
   return (
     <svg viewBox="0 0 120 100" fill="none" aria-hidden="true" className={styles.cardIllustration}>
-      {/* Back card — pink */}
       <rect x="30" y="28" width="68" height="52" rx="6" fill="#FF8FAB" transform="rotate(-8 64 54)"/>
-      {/* Middle card — blue */}
       <rect x="22" y="22" width="68" height="52" rx="6" fill="#6C8EF5" transform="rotate(-3 56 48)"/>
-      {/* Front card — white */}
       <rect x="18" y="16" width="68" height="52" rx="6" fill="#ffffff" stroke="#e0e0e0" strokeWidth="1"/>
-      {/* Image placeholder on front card */}
       <rect x="24" y="22" width="28" height="20" rx="3" fill="#E8EDFF"/>
       <rect x="26" y="24" width="10" height="7" rx="1" fill="#9BA8FF"/>
       <rect x="26" y="33" width="20" height="2" rx="1" fill="#C4CAFF"/>
-      {/* Text lines */}
       <rect x="56" y="24" width="22" height="3" rx="1.5" fill="#E0E3FF"/>
       <rect x="56" y="30" width="16" height="3" rx="1.5" fill="#E0E3FF"/>
       <rect x="24" y="46" width="54" height="2.5" rx="1.25" fill="#E0E3FF"/>
@@ -41,21 +24,16 @@ function IllustrationProvenExperience() {
   )
 }
 
-/** Card 02 — Collaborative Team: three 3D-style people */
 function IllustrationCollaborativeTeam() {
   return (
     <svg viewBox="0 0 120 100" fill="none" aria-hidden="true" className={styles.cardIllustration}>
-      {/* Sparkle top-right */}
       <path d="M96 18 L98 22 L102 20 L98 24 L100 28 L96 24 L92 28 L94 24 L90 20 L94 22Z" fill="#FFB74D" opacity="0.8"/>
-      {/* Left person — coral/pink */}
       <ellipse cx="38" cy="56" rx="14" ry="18" fill="#F48FB1"/>
       <circle cx="38" cy="32" r="12" fill="#F06292"/>
       <circle cx="38" cy="32" r="8" fill="#F8BBD0"/>
-      {/* Middle person (center, taller) — blue */}
       <ellipse cx="60" cy="52" rx="14" ry="22" fill="#7986CB"/>
       <circle cx="60" cy="26" r="12" fill="#5C6BC0"/>
       <circle cx="60" cy="26" r="8" fill="#C5CAE9"/>
-      {/* Right person — yellow */}
       <ellipse cx="82" cy="60" rx="13" ry="16" fill="#FFD54F"/>
       <circle cx="82" cy="36" r="11" fill="#FFC107"/>
       <circle cx="82" cy="36" r="7.5" fill="#FFF9C4"/>
@@ -63,55 +41,40 @@ function IllustrationCollaborativeTeam() {
   )
 }
 
-/** Card 03 — Client-Centric: bullseye target with cursor */
 function IllustrationClientCentric() {
   return (
     <svg viewBox="0 0 120 100" fill="none" aria-hidden="true" className={styles.cardIllustration}>
-      {/* Sparkle lines */}
       <line x1="28" y1="35" x2="20" y2="27" stroke="#FFC107" strokeWidth="2" strokeLinecap="round"/>
       <line x1="24" y1="48" x2="14" y2="48" stroke="#FFC107" strokeWidth="2" strokeLinecap="round"/>
       <line x1="28" y1="62" x2="20" y2="70" stroke="#FFC107" strokeWidth="2" strokeLinecap="round"/>
-      {/* Outer ring */}
       <circle cx="62" cy="48" r="30" fill="#7986CB" opacity="0.15"/>
       <circle cx="62" cy="48" r="30" stroke="#7986CB" strokeWidth="2.5"/>
-      {/* Middle ring */}
       <circle cx="62" cy="48" r="20" fill="#7986CB" opacity="0.25"/>
       <circle cx="62" cy="48" r="20" stroke="#7986CB" strokeWidth="2.5"/>
-      {/* Inner ring */}
       <circle cx="62" cy="48" r="10" fill="#7986CB" opacity="0.5"/>
       <circle cx="62" cy="48" r="10" stroke="#7986CB" strokeWidth="2.5"/>
-      {/* Center dot */}
       <circle cx="62" cy="48" r="4" fill="#7986CB"/>
-      {/* Red cursor arrow */}
       <path d="M74 60 L88 74 L84 76 L88 84 L82 82 L80 88 L76 76 L74 60Z"
             fill="#EF5350" stroke="#C62828" strokeWidth="1"/>
     </svg>
   )
 }
 
-/** Card 04 — Innovation & Growth: bar chart + upward arrow */
 function IllustrationInnovationGrowth() {
   return (
     <svg viewBox="0 0 120 100" fill="none" aria-hidden="true" className={styles.cardIllustration}>
-      {/* Sparkle */}
       <path d="M96 16 L97.5 20 L101.5 18 L97.5 22 L99 26 L95.5 22 L92 26 L93.5 22 L90 18 L94 20Z"
             fill="#FFD54F" opacity="0.9"/>
-      {/* Bar 1 — short */}
       <rect x="28" y="62" width="16" height="20" rx="4" fill="#7986CB"/>
-      {/* Bar 2 — medium */}
       <rect x="50" y="50" width="16" height="32" rx="4" fill="#7986CB"/>
-      {/* Bar 3 — tall */}
       <rect x="72" y="38" width="16" height="44" rx="4" fill="#7986CB"/>
-      {/* Ground line */}
       <rect x="22" y="82" width="78" height="2" rx="1" fill="#C5CAE9"/>
-      {/* Orange upward arrow */}
       <path d="M84 22 C84 22 90 16 96 10" stroke="#FF7043" strokeWidth="3" strokeLinecap="round"/>
       <path d="M90 8 L96 10 L94 16" stroke="#FF7043" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   )
 }
 
-/* ── Data: exactly matches reference screenshot ────────── */
 const FEATURE_CARDS = [
   {
     number:       '01',
@@ -151,7 +114,6 @@ const FEATURE_CARDS = [
   },
 ]
 
-/* ── Circular arrow button on each card ─────────────────── */
 function ReadMoreArrow() {
   return (
     <span className={styles.arrowBtn} aria-hidden="true">
@@ -167,10 +129,6 @@ function ReadMoreArrow() {
 export default function HomePage() {
   return (
     <div className={styles.page}>
-      {/* ════════════════════════════════════════
-          LEFT-EDGE GEOMETRIC BRAIN DECORATION
-          Positioned absolutely, partially clipped
-          ════════════════════════════════════════ */}
       <div className={styles.leftBrainWrap} aria-hidden="true">
         <img
           src={brainSymbol}
@@ -179,13 +137,9 @@ export default function HomePage() {
         />
       </div>
 
-      {/* ════════════════════════════════════════
-          HERO SECTION
-          ════════════════════════════════════════ */}
       <section className={styles.hero} aria-label="Hero — Why Choose Us">
         <div className={`container ${styles.heroInner}`}>
 
-          {/* Left: text content */}
           <div className={styles.heroContent}>
             <p className={styles.heroEyebrow}>WHY CHOOSE US?</p>
             <h1 className={styles.heroHeadline}>
@@ -198,7 +152,6 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Right: team collaboration image */}
           <div className={styles.heroImageWrap}>
             <img
               src={teamCollaboration}
@@ -210,9 +163,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════
-          FEATURE CARDS — 4 cards, no section header
-          ════════════════════════════════════════ */}
       <section className={styles.cardsSection} aria-label="Why choose BrainMint">
         <div className={`container ${styles.cardsContainer}`}>
           {FEATURE_CARDS.map((card) => (
@@ -221,7 +171,6 @@ export default function HomePage() {
               className={styles.card}
               style={{ background: card.bg } as React.CSSProperties}
             >
-              {/* Number badge */}
               <div
                 className={styles.cardBadge}
                 style={{
@@ -232,18 +181,14 @@ export default function HomePage() {
                 {card.number}
               </div>
 
-              {/* 3D-style illustration */}
               <div className={styles.cardIllustrationWrap}>
                 {card.illustration}
               </div>
 
-              {/* Title */}
               <h3 className={styles.cardTitle}>{card.title}</h3>
 
-              {/* Description */}
               <p className={styles.cardDesc}>{card.description}</p>
 
-              {/* Read more + arrow */}
               <div className={styles.cardFooter}>
                 <Link
                   to="/services"
