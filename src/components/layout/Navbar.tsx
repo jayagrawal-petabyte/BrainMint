@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import brainSymbol from '../../assets/brand/brainmint-symbol.png'
+import brainSymbol from '../../assets/brand/brainmint-logo.png'
 import facebookSvg from '../../assets/icons/facebook.svg'
 import twitterSvg from '../../assets/icons/twitter.svg'
 import linkedinSvg from '../../assets/icons/linkedin.svg'
@@ -45,10 +45,7 @@ export default function Navbar() {
             className={styles.logoSymbol}
             aria-hidden="true"
           />
-          <span className={styles.logoText}>
-            <span className={styles.logoBrain}>Brain</span>
-            <span className={styles.logoMint}>Mint</span>
-          </span>
+          
         </Link>
 
         <ul className={styles.navLinks} role="list">

@@ -141,7 +141,7 @@ export default function HomePage() {
         <div className={`container ${styles.heroInner}`}>
 
           <div className={styles.heroContent}>
-            <p className={styles.heroEyebrow}>WHY CHOOSE US?</p>
+            
             <h1 className={styles.heroHeadline}>
               More than a company.<br />
               A team that builds, learns and grows together.
@@ -199,10 +199,21 @@ export default function HomePage() {
                 </Link>
                 <ReadMoreArrow />
               </div>
+              
             </article>
+            
+            
           ))}
+          
         </div>
+        <div className={styles.serviceButtonWrapper}>
+  <Link to="/service" className={styles.serviceButton}>
+    Request a Service
+  </Link>
+</div>
       </section>
     </div>
+    
   )
+  
 }

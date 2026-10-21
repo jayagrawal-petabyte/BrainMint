@@ -1,8 +1,19 @@
+
+/* ── Page wrapper — contains the absolute brain decoration ── */
 .page {
   position: relative;
-  overflow-x: hidden;
+  overflow-x: hidden;   /* clip the left-edge brain that extends off-screen */
   background: #ffffff;
 }
+
+/* ════════════════════════════════════════════════════════
+   LEFT-EDGE GEOMETRIC BRAIN DECORATION
+   Asset: src/assets/brand/brainmint-symbol.png (RGBA, 1024×434)
+   Figma spec: width≈668px, height≈310px, left≈−109px,
+               top≈308px, rotation=−96°
+   CSS values below are translated from Figma coordinates
+   to match the visual at a 1200px container / 1440px viewport.
+   ════════════════════════════════════════════════════════ */
 
 .leftBrainWrap {
   position: absolute;
@@ -21,7 +32,7 @@
    */
   left: -266px;
   top: 173px;
-  width: 560px;
+  width: 560px;          /* natural CSS width before rotation */
   transform: rotate(-96deg);
   transform-origin: center center;
   z-index: 0;
@@ -30,24 +41,30 @@
 
 .leftBrainImg {
   width: 100%;
-  height: auto;
+  height: auto;          /* preserves 1024:434 aspect ratio */
   display: block;
   object-fit: contain;
 }
+
+/* ════════════════════════════════════════════════════════
+   HERO SECTION
+   ════════════════════════════════════════════════════════ */
 
 .hero {
   position: relative;
   padding-top: var(--space-10);
   padding-bottom: var(--space-6);
   background: #ffffff;
-  z-index: 1;
+  z-index: 1;  /* above the left brain decoration */
 }
 
+/* Two-column hero grid */
 .heroInner {
   display: grid;
   grid-template-columns: 55% 45%;
   gap: var(--space-8);
   align-items: flex-start;
+  /* Hero content starts with generous left indent to clear the brain */
   padding-left: 140px;
 }
 
@@ -57,32 +74,36 @@
   gap: var(--space-4);
 }
 
+/* "WHY CHOOSE US?" — purple-blue, uppercase, small */
 .heroEyebrow {
   font-size: var(--text-sm);
   font-weight: var(--fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #4F6EF7;
+  color: #4F6EF7;       /* purple-blue, matches reference */
   margin: 0;
 }
 
+/* Main headline — large, bold, dark/black, two lines */
 .heroHeadline {
   font-size: 2.55rem;
   font-weight: var(--fw-extrabold);
-  color: #111827;
+  color: #111827;         /* near-black */
   line-height: 1.18;
   letter-spacing: -0.3px;
   margin: 0;
 }
 
+/* Supporting paragraph */
 .heroSub {
   font-size: var(--text-base);
-  color: #4B5563;
+  color: #4B5563;          /* dark gray */
   line-height: 1.7;
   max-width: 520px;
   margin: 0;
 }
 
+/* Image column */
 .heroImageWrap {
   display: flex;
   justify-content: flex-end;
@@ -98,6 +119,11 @@
   display: block;
 }
 
+/* ════════════════════════════════════════════════════════
+   FEATURE CARDS SECTION
+   No section header — cards follow hero directly.
+   ════════════════════════════════════════════════════════ */
+
 .cardsSection {
   position: relative;
   z-index: 1;
@@ -106,13 +132,16 @@
   background: #ffffff;
 }
 
+/* 4-column grid, matching reference proportions */
 .cardsContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-5);
+  /* Same left-indent as hero to keep cards aligned with content */
   padding-left: 140px;
 }
 
+/* ── Individual card ─────────────────────────────────── */
 .card {
   border-radius: 18px;
   padding: var(--space-5) var(--space-5) var(--space-6);
@@ -132,6 +161,7 @@
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.11);
 }
 
+/* Number badge — small circle, top-left */
 .cardBadge {
   display: inline-flex;
   align-items: center;
@@ -146,6 +176,7 @@
   line-height: 1;
 }
 
+/* Illustration wrapper — centered, upper portion */
 .cardIllustrationWrap {
   display: flex;
   justify-content: center;
@@ -160,6 +191,7 @@
   height: 100px;
 }
 
+/* Title */
 .cardTitle {
   font-size: 1.05rem;
   font-weight: var(--fw-bold);
@@ -168,6 +200,7 @@
   margin: 0;
 }
 
+/* Description */
 .cardDesc {
   font-size: var(--text-sm);
   color: #6B7280;
@@ -176,6 +209,7 @@
   margin: 0;
 }
 
+/* Footer row: "Read more" + arrow */
 .cardFooter {
   display: flex;
   align-items: center;
@@ -183,6 +217,7 @@
   margin-top: var(--space-1);
 }
 
+/* "Read more" — purple-blue, same for all cards */
 .cardReadMore {
   font-size: var(--text-sm);
   font-weight: var(--fw-semibold);
@@ -196,6 +231,7 @@
   text-decoration: underline;
 }
 
+/* Circular arrow */
 .arrowBtn {
   display: flex;
   align-items: center;
@@ -209,12 +245,20 @@
   display: block;
 }
 
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════ */
+
+/* Large tablet: reduce the left indent, keep 4 cols */
 @media (max-width: 1280px) {
   .heroInner,
   .cardsContainer {
     padding-left: var(--space-8);
   }
 
+  /* 460px wide — natural height ≈195px
+   * Visual: ≈232px wide × 480px tall after rotate(-96deg)
+   * left=-226px positions visual right ≈ 120px from page edge */
   .leftBrainWrap {
     width: 460px;
     left: -226px;
@@ -222,6 +266,7 @@
   }
 }
 
+/* Tablet: 2-col cards, 1-col hero */
 @media (max-width: 1024px) {
   .heroInner {
     grid-template-columns: 1fr;
@@ -248,12 +293,13 @@
   }
 
   .leftBrainWrap {
-    width: 340px;
-    left: -193px;
-    top: 100px;
+    left: -160px;
+    width: 240px;
+    top: 60px;
   }
 }
 
+/* Mobile: 1-col everything */
 @media (max-width: 640px) {
   .hero {
     padding-top: var(--space-8);
@@ -277,10 +323,10 @@
     padding-left: var(--space-4);
   }
 
+  /* On mobile, hide the brain or push it far off-screen so it doesn't cover content */
   .leftBrainWrap {
-    width: 220px;
-    left: -210px;
-    top: 80px;
+    left: -200px;
+    width: 200px;
   }
 
   .cardsSection {
@@ -292,4 +338,33 @@
   .leftBrainWrap {
     display: none;
   }
+}
+.serviceButtonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 40px 0 44px;
+  box-sizing: border-box;
+}
+
+.serviceButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 180px;
+  padding: 15px 28px;
+  background-color: #f36f21;
+  color: #ffffff;
+  border: none;
+  border-radius: 19px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.serviceButton:hover {
+  background-color: #df5d16;
+  transform: translateY(-2px);
 }
