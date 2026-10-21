@@ -1,0 +1,292 @@
+.contact-page {
+  --orange: #f4772c;
+  --pink: #f45187;
+  --green: #16b83e;
+  --outline-green: #52d67b;
+  --text: #151515;
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 220px);
+  padding: 24px 0 60px;
+  overflow: hidden;
+  color: var(--text);
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.contact-page * {
+  box-sizing: border-box;
+}
+
+/* === Pink Back Button === */
+.contact-back {
+  position: absolute;
+  top: 20px;
+  left: 3.5%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e86d91;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.contact-back:hover {
+  transform: translateX(-2px);
+  background: #db5980;
+}
+
+/* === Title & Subtitle Intro === */
+.contact-intro {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+  margin: 4px auto 32px;
+  text-align: center;
+  max-width: 620px;
+}
+
+.contact-intro h1 {
+  margin: 0 0 6px;
+  color: var(--orange);
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 700;
+}
+
+.contact-intro p {
+  margin: 2px 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #1a1a1a;
+}
+
+/* === Content Wrapper === */
+.contact-content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 24px;
+}
+
+/* === Left Origami Graphic === */
+.contact-art {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 150px;
+  max-width: 14vw;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contact-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* === Form Card Section === */
+.contact-form-area {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 690px;
+  margin: 0 auto;
+}
+
+.contact-card {
+  position: relative;
+  width: 100%;
+  padding: 32px 36px 36px;
+  border: 1px solid rgba(244, 119, 44, 0.25);
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 0 32px 8px rgba(255, 160, 110, 0.42);
+  transition: all 0.3s ease;
+}
+
+.contact-card h2 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #151515;
+}
+
+/* === Form Fields === */
+.contact-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+.contact-fields input,
+.contact-fields select,
+.contact-fields textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 0 16px;
+  border: 1.5px solid var(--outline-green);
+  border-radius: 12px;
+  outline: none;
+  background: #ffffff;
+  color: #202020;
+  font-family: inherit;
+  font-size: 12.5px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-fields input,
+.contact-fields select {
+  height: 42px;
+}
+
+.contact-fields input::placeholder,
+.contact-fields textarea::placeholder {
+  color: #858585;
+  opacity: 1;
+}
+
+.contact-fields input:focus,
+.contact-fields select:focus,
+.contact-fields textarea:focus {
+  border-color: #16b83e;
+  box-shadow: 0 0 0 2px rgba(22, 184, 62, 0.16);
+}
+
+.contact-fields select {
+  cursor: pointer;
+}
+
+.field-full {
+  grid-column: 1 / -1;
+}
+
+.contact-fields .requirements-field {
+  height: 110px;
+  padding-top: 12px;
+  resize: vertical;
+}
+
+/* === Send Message Button (Outside below the card) === */
+.contact-submit {
+  display: block;
+  min-width: 190px;
+  height: 42px;
+  padding: 0 36px;
+  margin: 28px auto 0;
+  border: none;
+  border-radius: 12px;
+  background: var(--green);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.18s ease;
+}
+
+.contact-submit:hover {
+  background: #13a934;
+  transform: translateY(-1px);
+}
+
+/* === Submitted State Inside Card === */
+.contact-submitted-text {
+  margin: 20px 0 28px;
+  color: #555e6d;
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* === Submission Success Section Below Card === */
+.thank-you-area {
+  margin-top: 36px;
+  text-align: center;
+  animation: fadeIn 0.35s ease-out;
+}
+
+.thank-you-title {
+  margin: 0 0 16px;
+  font-size: clamp(19px, 2.3vw, 24px);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #151515;
+  text-transform: uppercase;
+}
+
+.explore-more-btn {
+  display: inline-block;
+  padding: 11px 36px;
+  border: none;
+  border-radius: 10px;
+  background: var(--green);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.18s ease;
+}
+
+.explore-more-btn:hover {
+  background: #13a934;
+  transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Floating Scroll-To-Top Button === */
+.contact-scroll-top {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--orange);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(244, 119, 44, 0.35);
+  transition: background 0.2s ease, transform 0.18s ease;
+}
+
+.contact-scroll-top:hover {
+  background: #e0661c;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .contact-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-art {
+    opacity: 0.25;
+    width: 100px;
+  }
+
+  .contact-card {
+    padding: 24px 20px;
+  }
+}
