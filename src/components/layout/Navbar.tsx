@@ -11,7 +11,6 @@ const NAV_LINKS = [
   { label: 'About',      to: '/about',    hasDropdown: false },
   { label: 'Service',    to: '/services', hasDropdown: true  },
   { label: 'Project',    to: '/projects', hasDropdown: true  },
-  { label: 'Pages',      to: '#',         hasDropdown: true  },
   { label: 'Contact Us', to: '/contact',  hasDropdown: false },
 ]
 
