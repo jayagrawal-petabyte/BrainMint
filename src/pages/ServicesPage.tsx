@@ -7,7 +7,6 @@ import aiAgentImage from '../assets/services/ai-agent.png'
 import offshoreImage from '../assets/services/offshore.png'
 import './ServicesPage.css'
 
-// Provisional copy — replace with the approved text from the Figma design.
 const SERVICES = [
   {
     id: 'website-development',

@@ -4,6 +4,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 html {
@@ -11,6 +20,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 body {
@@ -20,6 +31,8 @@ body {
   color: var(--color-text-body);
   background-color: var(--color-bg);
   overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 img,
@@ -59,7 +72,7 @@ select {
   font: inherit;
 }
 
-/* Focus ring — visible for keyboard users */
+
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;

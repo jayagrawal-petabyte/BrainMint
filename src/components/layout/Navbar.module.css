@@ -1,4 +1,3 @@
-/* Navbar.module.css — BrainMint — matches reference screenshot */
 
 /* ── Outer header ──────────────────────────────────────── */
 .navbar {
@@ -46,11 +45,11 @@
 }
 
 .logoBrain {
-  color: #111827;   /* near-black, matches reference */
+  color: #111827;   
 }
 
 .logoMint {
-  color: #f97316;   /* warm orange, matches "Mint" in reference */
+  color: #f97316;   
 }
 
 /* ── Desktop nav links ─────────────────────────────────── */
@@ -83,7 +82,6 @@
   background: #fff0f5;
 }
 
-/* Active — hot pink, matches reference screenshot */
 .navLink.active {
   color: #FF4081;
   font-weight: var(--fw-semibold);
@@ -110,7 +108,7 @@
   width: 34px;
   height: 34px;
   border-radius: var(--radius-full);
-  background: #dbeafe;      /* pale blue, matches reference */
+  background: #dbeafe;      
   border: none;
   transition:
     background var(--transition-fast),

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import teamCollaboration from '../assets/brand/team-collaboration.png'
-import brainSymbol from '../assets/contact/image 12.png'
+import brainSymbol from '../assets/brand/brainmint-bg-logo.png'
 import styles from './HomePage.module.css'
 
 function IllustrationProvenExperience() {
@@ -123,8 +123,7 @@ function ReadMoreArrow() {
 export default function HomePage() {
   return (
     <div className={styles.page}>
-      {/* Decorative logo behind the page content */}
-      <div className={styles.leftBrainWrap} aria-hidden="true">
+            <div className={styles.leftBrainWrap} aria-hidden="true">
         <img src={brainSymbol} alt="" className={styles.leftBrainImg} />
       </div>
 
@@ -133,7 +132,7 @@ export default function HomePage() {
           <div className={styles.heroContent}>
             <h1 className={styles.heroHeadline}>
               More than a company.<br />
-              A team that builds, learns and grows together.
+              A team that builds, serves and grows together.
             </h1>
             <p className={styles.heroSub}>
               We combine people, ideas and technology to create meaningful solutions

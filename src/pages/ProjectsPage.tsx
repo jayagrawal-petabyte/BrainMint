@@ -1,8 +1,3 @@
-/**
- * Placeholder — Projects page
- * Owned by: teammate
- * This file is intentionally minimal. Do not add content here.
- */
 export default function ProjectsPage() {
   return (
     <section className="section">

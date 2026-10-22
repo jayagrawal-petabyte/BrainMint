@@ -9,30 +9,30 @@
 /* Left-side BrainMint geometric logo */
 .leftBrainWrap {
   position: absolute;
-  top: 250px;
-  left: -120px;
-  width: 311px;
-  height: 723px;
-  overflow: visible;
+  top: 170px;
+  left: 0;
+  width: clamp(230px, 22vw, 340px);
+  max-width: 360px;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
+  overflow: visible;
 }
 
 .leftBrainImg {
   display: block;
   width: 100%;
-  height: 100%;
-  max-width: none;
+  height: auto;
   object-fit: contain;
-  object-position: center;
+  object-position: left top;
 }
+
 /* Hero section */
 .hero {
   position: relative;
   padding-top: var(--space-10);
   padding-bottom: var(--space-6);
-  background: #ffffff;
-  z-index: 1;
+  background: transparent;
+  z-index: 2;
 }
 
 .heroInner {
@@ -40,12 +40,11 @@
   grid-template-columns: 55% 45%;
   gap: var(--space-8);
   align-items: flex-start;
-  padding-left: 140px;
 }
 
 .heroContent {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -71,7 +70,7 @@
 /* Hero image */
 .heroImageWrap {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -89,19 +88,18 @@
 /* Feature cards section */
 .cardsSection {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding-top: var(--space-6);
   padding-bottom: var(--space-20);
-  background: #ffffff;
+  background: transparent;
 }
 
 .cardsContainer {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-5);
-  padding-left: 140px;
 }
 
 /* Individual card */
@@ -117,6 +115,7 @@
   transition:
     transform var(--transition-base),
     box-shadow var(--transition-base);
+  z-index: 2;
 }
 
 .card:hover {
@@ -210,7 +209,7 @@
 /* Request a Service button */
 .serviceButtonWrapper {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -244,17 +243,10 @@
 
 /* Large desktop and laptop */
 @media (max-width: 1280px) {
-  .heroInner,
-  .cardsContainer {
-    padding-left: var(--space-8);
-  }
-
   .leftBrainWrap {
-    left: -230px;
-    top: 250px;
-    width: 311px;
-    height: 723px;
-
+    top: 170px;
+    left: 0;
+    width: clamp(210px, 22vw, 290px);
   }
 }
 
@@ -262,7 +254,6 @@
 @media (max-width: 1024px) {
   .heroInner {
     grid-template-columns: 1fr;
-    padding-left: var(--space-6);
   }
 
   .heroImageWrap {
@@ -280,15 +271,14 @@
 
   .cardsContainer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding-left: var(--space-6);
     gap: var(--space-4);
   }
 
   .leftBrainWrap {
-    left: -180px;
-    top: 180px;
-    width: 280px;
-    height: 650px;
+    top: 220px;
+    left: 0;
+    width: 210px;
+    opacity: 0.85;
   }
 }
 
@@ -296,11 +286,6 @@
 @media (max-width: 640px) {
   .hero {
     padding-top: var(--space-8);
-  }
-
-  .heroInner {
-    padding-left: var(--space-4);
-    gap: var(--space-6);
   }
 
   .heroHeadline {
@@ -313,14 +298,13 @@
 
   .cardsContainer {
     grid-template-columns: 1fr;
-    padding-left: var(--space-4);
   }
 
   .leftBrainWrap {
-    left: -220px;
-    top: 180px;
-    width: 240px;
-    height: 600px;
+    top: 240px;
+    left: 0;
+    width: 160px;
+    opacity: 0.6;
   }
 
   .cardsSection {
@@ -331,6 +315,8 @@
 /* Very small mobile screens */
 @media (max-width: 400px) {
   .leftBrainWrap {
-    left: -250px;
+    left: -20px;
+    width: 130px;
+    opacity: 0.5;
   }
 }
