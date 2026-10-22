@@ -1,110 +1,77 @@
 
-/* ── Page wrapper — contains the absolute brain decoration ── */
+/* Page wrapper */
 .page {
   position: relative;
-  overflow-x: hidden;   /* clip the left-edge brain that extends off-screen */
+  overflow-x: hidden;
   background: #ffffff;
 }
 
-/* ════════════════════════════════════════════════════════
-   LEFT-EDGE GEOMETRIC BRAIN DECORATION
-   Asset: src/assets/brand/brainmint-symbol.png (RGBA, 1024×434)
-   Figma spec: width≈668px, height≈310px, left≈−109px,
-               top≈308px, rotation=−96°
-   CSS values below are translated from Figma coordinates
-   to match the visual at a 1200px container / 1440px viewport.
-   ════════════════════════════════════════════════════════ */
-
+/* Left-side BrainMint geometric logo */
 .leftBrainWrap {
   position: absolute;
-  /*
-   * Geometry after rotate(-96deg) on a 560×237 layout box:
-   *   visual width  ≈ |560×sin96°| + |237×cos96°| ≈ 282px
-   *   visual height ≈ |560×cos96°| + |237×sin96°| ≈ 583px
-   *
-   * Target: visual right edge ≈ 155px (matching screenshot),
-   *         visual top ≈ 0 (flush with hero section top).
-   *   → layout left = (155 − 282/2) − 560/2 = 14 − 280 = −266px
-   *   → layout top  = (583/2) − 237/2 = 291 − 118 = 173px
-   *
-   * Figma left=−109 maps close when accounting for the
-   * container left-margin offset on the 1440px Figma canvas.
-   */
-  left: -266px;
-  top: 173px;
-  width: 560px;          /* natural CSS width before rotation */
-  transform: rotate(-96deg);
-  transform-origin: center center;
-  z-index: 0;
+  top: 250px;
+  left: -120px;
+  width: 311px;
+  height: 723px;
+  overflow: visible;
   pointer-events: none;
+  z-index: 0;
 }
 
 .leftBrainImg {
-  width: 100%;
-  height: auto;          /* preserves 1024:434 aspect ratio */
   display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
   object-fit: contain;
+  object-position: center;
 }
-
-/* ════════════════════════════════════════════════════════
-   HERO SECTION
-   ════════════════════════════════════════════════════════ */
-
+/* Hero section */
 .hero {
   position: relative;
   padding-top: var(--space-10);
   padding-bottom: var(--space-6);
   background: #ffffff;
-  z-index: 1;  /* above the left brain decoration */
+  z-index: 1;
 }
 
-/* Two-column hero grid */
 .heroInner {
   display: grid;
   grid-template-columns: 55% 45%;
   gap: var(--space-8);
   align-items: flex-start;
-  /* Hero content starts with generous left indent to clear the brain */
   padding-left: 140px;
 }
 
 .heroContent {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
 }
 
-/* "WHY CHOOSE US?" — purple-blue, uppercase, small */
-.heroEyebrow {
-  font-size: var(--text-sm);
-  font-weight: var(--fw-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #4F6EF7;       /* purple-blue, matches reference */
-  margin: 0;
-}
-
-/* Main headline — large, bold, dark/black, two lines */
 .heroHeadline {
   font-size: 2.55rem;
   font-weight: var(--fw-extrabold);
-  color: #111827;         /* near-black */
+  color: #111827;
   line-height: 1.18;
   letter-spacing: -0.3px;
   margin: 0;
 }
 
-/* Supporting paragraph */
 .heroSub {
   font-size: var(--text-base);
-  color: #4B5563;          /* dark gray */
+  color: #4B5563;
   line-height: 1.7;
   max-width: 520px;
   margin: 0;
 }
 
-/* Image column */
+/* Hero image */
 .heroImageWrap {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -119,11 +86,7 @@
   display: block;
 }
 
-/* ════════════════════════════════════════════════════════
-   FEATURE CARDS SECTION
-   No section header — cards follow hero directly.
-   ════════════════════════════════════════════════════════ */
-
+/* Feature cards section */
 .cardsSection {
   position: relative;
   z-index: 1;
@@ -132,28 +95,28 @@
   background: #ffffff;
 }
 
-/* 4-column grid, matching reference proportions */
 .cardsContainer {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-5);
-  /* Same left-indent as hero to keep cards aligned with content */
   padding-left: 140px;
 }
 
-/* ── Individual card ─────────────────────────────────── */
+/* Individual card */
 .card {
-  border-radius: 18px;
-  padding: var(--space-5) var(--space-5) var(--space-6);
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  min-height: 280px;
+  padding: var(--space-5) var(--space-5) var(--space-6);
+  border-radius: 18px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
   transition:
     transform var(--transition-base),
     box-shadow var(--transition-base);
-  position: relative;
-  min-height: 280px;
 }
 
 .card:hover {
@@ -161,7 +124,7 @@
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.11);
 }
 
-/* Number badge — small circle, top-left */
+/* Number badge */
 .cardBadge {
   display: inline-flex;
   align-items: center;
@@ -176,7 +139,7 @@
   line-height: 1;
 }
 
-/* Illustration wrapper — centered, upper portion */
+/* Card illustrations */
 .cardIllustrationWrap {
   display: flex;
   justify-content: center;
@@ -191,7 +154,7 @@
   height: 100px;
 }
 
-/* Title */
+/* Card title */
 .cardTitle {
   font-size: 1.05rem;
   font-weight: var(--fw-bold);
@@ -200,7 +163,7 @@
   margin: 0;
 }
 
-/* Description */
+/* Card description */
 .cardDesc {
   font-size: var(--text-sm);
   color: #6B7280;
@@ -209,7 +172,7 @@
   margin: 0;
 }
 
-/* Footer row: "Read more" + arrow */
+/* Read more row */
 .cardFooter {
   display: flex;
   align-items: center;
@@ -217,7 +180,6 @@
   margin-top: var(--space-1);
 }
 
-/* "Read more" — purple-blue, same for all cards */
 .cardReadMore {
   font-size: var(--text-sm);
   font-weight: var(--fw-semibold);
@@ -231,7 +193,7 @@
   text-decoration: underline;
 }
 
-/* Circular arrow */
+/* Arrow icon */
 .arrowBtn {
   display: flex;
   align-items: center;
@@ -245,28 +207,58 @@
   display: block;
 }
 
-/* ════════════════════════════════════════════════════════
-   RESPONSIVE
-   ════════════════════════════════════════════════════════ */
+/* Request a Service button */
+.serviceButtonWrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 40px 0 44px;
+  box-sizing: border-box;
+}
 
-/* Large tablet: reduce the left indent, keep 4 cols */
+.serviceButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 180px;
+  padding: 15px 28px;
+  background-color: #f36f21;
+  color: #ffffff;
+  border: none;
+  border-radius: 19px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.serviceButton:hover {
+  background-color: #df5d16;
+  transform: translateY(-2px);
+}
+
+/* Large desktop and laptop */
 @media (max-width: 1280px) {
   .heroInner,
   .cardsContainer {
     padding-left: var(--space-8);
   }
 
-  /* 460px wide — natural height ≈195px
-   * Visual: ≈232px wide × 480px tall after rotate(-96deg)
-   * left=-226px positions visual right ≈ 120px from page edge */
   .leftBrainWrap {
-    width: 460px;
-    left: -226px;
-    top: 143px;
+    left: -230px;
+    top: 250px;
+    width: 311px;
+    height: 723px;
+
   }
 }
 
-/* Tablet: 2-col cards, 1-col hero */
+/* Tablet */
 @media (max-width: 1024px) {
   .heroInner {
     grid-template-columns: 1fr;
@@ -287,19 +279,20 @@
   }
 
   .cardsContainer {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     padding-left: var(--space-6);
     gap: var(--space-4);
   }
 
   .leftBrainWrap {
-    left: -160px;
-    width: 240px;
-    top: 60px;
+    left: -180px;
+    top: 180px;
+    width: 280px;
+    height: 650px;
   }
 }
 
-/* Mobile: 1-col everything */
+/* Mobile */
 @media (max-width: 640px) {
   .hero {
     padding-top: var(--space-8);
@@ -323,10 +316,11 @@
     padding-left: var(--space-4);
   }
 
-  /* On mobile, hide the brain or push it far off-screen so it doesn't cover content */
   .leftBrainWrap {
-    left: -200px;
-    width: 200px;
+    left: -220px;
+    top: 180px;
+    width: 240px;
+    height: 600px;
   }
 
   .cardsSection {
@@ -334,37 +328,9 @@
   }
 }
 
+/* Very small mobile screens */
 @media (max-width: 400px) {
   .leftBrainWrap {
-    display: none;
+    left: -250px;
   }
-}
-.serviceButtonWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 40px 0 44px;
-  box-sizing: border-box;
-}
-
-.serviceButton {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 180px;
-  padding: 15px 28px;
-  background-color: #f36f21;
-  color: #ffffff;
-  border: none;
-  border-radius: 19px;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.serviceButton:hover {
-  background-color: #df5d16;
-  transform: translateY(-2px);
 }
