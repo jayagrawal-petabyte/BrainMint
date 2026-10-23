@@ -1,6 +1,5 @@
 .page {
   position: relative;
-  min-height: 620px;
   overflow: hidden;
   background: #ffffff;
 }
@@ -9,222 +8,267 @@
   position: relative;
   z-index: 1;
   max-width: 1200px;
-  min-height: 620px;
   margin: 0 auto;
-  padding: 24px 24px 64px;
+  padding: 18px 48px 72px;
 }
 
-.brainDecoration {
+.slidingLogo {
   position: absolute;
-  top: 38px;
+  top: 12%;
   left: 0;
-  width: 311px;
-  height: 723px;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.brainDecoration img {
-  width: 311px;
+  z-index: 0;
+  width: clamp(220px, 24vw, 311px);
+  max-height: 78%;
   max-width: none;
-  height: 723px;
   object-fit: contain;
-  transform: none;
+  pointer-events: none;
 }
 
 .backButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  margin-left: 36px;
+  width: 48px;
+  height: 48px;
+  margin: 0 0 10px 16px;
   border-radius: 50%;
   background: #df638c;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 27px;
   line-height: 1;
   box-shadow: 0 3px 8px rgb(0 0 0 / 12%);
-  transition: transform 150ms ease, background 150ms ease;
 }
 
-.backButton:hover {
-  background: #d54878;
-  transform: translateX(-2px);
+.whySection,
+.missionSection {
+  position: relative;
+  z-index: 1;
 }
 
-.intro {
-  margin: -2px auto 34px;
+.whySection {
+  margin-top: 120px;
+}
+
+.whySection::before,
+.missionSection::before {
+  display: none;
+}
+
+.whyIntro {
+  max-width: 900px;
+  margin: 0 auto 50px;
   text-align: center;
-  color: #111111;
 }
 
-.intro h1 {
-  margin: 0 0 2px;
-  color: #ed6b2d;
-  font-size: clamp(1.75rem, 3vw, 2.15rem);
-  font-weight: 700;
+.whyIntro h1 {
+  margin: 0 0 20px;
+  color: #101e3a;
+  font-size: clamp(2.3rem, 5vw, 3.2rem);
+  line-height: 1.1;
 }
 
-.intro p {
-  margin: 0;
+.whyIntro p {
+  margin: 0 auto;
+  color: #667085;
   font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.7;
 }
 
-.formSection {
-  width: min(100%, 910px);
-  min-height: 150px;
-  margin-left: auto;
-  padding: 15px 38px 28px;
-  border: 1px solid #888888;
-  border-radius: 25px;
-  background: #ffffff;
-  box-shadow: -8px 8px 24px rgb(255 125 61 / 34%);
-}
-
-.formSection h2 {
-  margin: 0 0 12px;
-  color: #111111;
-  font-size: 1.25rem;
-}
-
-.form,
-.formGrid {
+.reasonGrid {
   display: grid;
-  gap: 14px 20px;
-}
-
-.formGrid {
   grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+  max-width: 918px;
+  margin: 0 auto;
 }
 
-.form input,
-.form textarea {
-  width: 100%;
-  border: 1px solid #26bd58;
+.reasonCard {
+  min-height: 200px;
+  padding: 25px 29px;
+  border: 1px solid #dce4f1;
   border-radius: 12px;
-  padding: 10px 19px;
-  color: #333333;
-  font-size: 0.75rem;
-  outline: none;
+  background: #ffffff;
 }
 
-.form textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
-.form input:focus,
-.form textarea:focus {
-  border-color: #df638c;
-  box-shadow: 0 0 0 3px rgb(223 99 140 / 15%);
-}
-
-.form input::placeholder,
-.form textarea::placeholder {
-  color: #777777;
-}
-
-.submitButton,
-.exploreButton {
-  justify-self: center;
-  min-width: 270px;
-  margin-top: 30px;
-  padding: 11px 24px;
-  border: 1px solid #4f22ba;
-  border-radius: 12px;
-  background: #10bd3c;
-  color: #ffffff;
-  font-size: 0.8rem;
-  transition: filter 150ms ease, transform 150ms ease;
-}
-
-.submitButton:hover,
-.exploreButton:hover {
-  filter: brightness(0.94);
-  transform: translateY(-1px);
-}
-
-.confirmation {
-  min-height: 76px;
-  padding: 10px 14px;
-  color: #707070;
-  font-size: 0.95rem;
-}
-
-.thanks {
-  margin-top: 34px;
-  text-align: center;
-}
-
-.thanks h2 {
-  margin: 0;
-  color: #111111;
-  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
-}
-
-.exploreButton {
-  margin-top: 22px;
-}
-
-.scrollTop {
-  position: absolute;
-  right: 12px;
-  bottom: 18px;
-  z-index: 2;
+.checkmark {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 35px;
   height: 35px;
+  margin-bottom: 22px;
+  border: 4px solid #4667b2;
   border-radius: 50%;
-  background: #ff681f;
-  color: #ffffff;
+  color: #4667b2;
   font-size: 1.25rem;
+  font-weight: 700;
   line-height: 1;
 }
 
-.scrollTop:hover {
-  background: #e85816;
+.reasonCard h2 {
+  margin: 0 0 12px;
+  color: #111111;
+  font-size: 1.25rem;
 }
 
-@media (max-width: 700px) {
+.reasonCard p {
+  max-width: 330px;
+  margin: 0;
+  color: #737b91;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 2;
+}
+
+.exploreButton {
+  display: block;
+  width: fit-content;
+  margin: 35px auto 0;
+  padding: 14px 32px;
+  border-radius: 6px;
+  background: #ef7129;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.exploreButton:hover {
+  filter: brightness(0.94);
+  transform: translateY(-2px);
+}
+
+.missionSection {
+  margin-top: 80px;
+}
+
+.missionIntro {
+  margin-bottom: 50px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #6478f4;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.missionIntro h2 {
+  margin: 0 0 12px;
+  color: #111111;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.missionIntro > p:last-child {
+  margin: 0;
+  color: #111111;
+  font-size: 1rem;
+}
+
+.missionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.missionArt {
+  width: 100%;
+  max-width: 690px;
+}
+
+.statementList {
+  display: grid;
+  gap: 48px;
+}
+
+.statementCard {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 28px;
+  min-height: 250px;
+  padding: 32px;
+  border-radius: 32px;
+  box-shadow: 0 7px 5px rgb(0 0 0 / 35%);
+}
+
+.missionCard {
+  background: #fff0f1;
+}
+
+.visionCard {
+  background: #eef8ff;
+}
+
+.statementCard img {
+  width: 105px;
+  height: 105px;
+  object-fit: contain;
+}
+
+.statementCard h3 {
+  margin: 7px 0 10px;
+  color: #111111;
+  font-size: 1.55rem;
+}
+
+.statementCard p {
+  margin: 0;
+  color: #5e687e;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 2;
+}
+
+.scrollTop {
+  position: fixed;
+  right: 24px;
+  bottom: 22px;
+  z-index: 5;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ff681f;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 800px) {
   .main {
-    min-height: 680px;
-    padding-inline: 16px;
-  }
-
-  .brainDecoration {
-    left: 0;
-    opacity: 0.8;
-  }
-
-  .backButton {
-    margin-left: 0;
-  }
-
-  .intro {
-    margin-top: 20px;
-  }
-
-  .intro p {
     padding-inline: 20px;
-    font-size: 0.85rem;
   }
 
-  .formSection {
-    padding: 18px 18px 26px;
-  }
-
-  .formGrid {
+  .reasonGrid,
+  .missionGrid {
     grid-template-columns: 1fr;
   }
 
-  .submitButton,
-  .exploreButton {
-    width: 100%;
-    min-width: 0;
+  .missionGrid {
+    gap: 28px;
+  }
+
+  .slidingLogo {
+    left: -105px;
+    width: 260px;
+    height: auto;
+  }
+
+  .statementList {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .reasonCard {
+    min-height: auto;
+  }
+
+  .statementCard {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .statementCard img {
+    width: 72px;
+    height: 72px;
   }
 }
