@@ -279,17 +279,6 @@
   transform: translateY(-2px);
 }
 
-/* ── Entrance animation ──
-   Reference video (see summary): clicking a tile morphs that tile into the detail panel and its
-   illustration into the large top-right illustration (~300ms), while the other tiles, the intro
-   and the rest of the page cross-fade out. That is done with the View Transitions API
-   (see the ::view-transition rules below); the <article> and its illustration carry the same
-   view-transition-names as the clicked tile.
-
-   The keyframes here are only the FALLBACK entrance (deep link, browser Back from /contact,
-   browsers without View Transitions). The morph path disables them with --morph.
-   fill-mode is "backwards" so no stacking context lingers after the animation. */
-
 @keyframes services-detail-in {
   from {
     opacity: 0;
