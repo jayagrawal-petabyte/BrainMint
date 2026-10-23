@@ -3,6 +3,8 @@
   --service-cta-dark: #b81d5c;
   --service-glow: 0 12px 40px rgba(124, 106, 247, 0.22);
   --service-glow-hover: 0 16px 48px rgba(124, 106, 247, 0.32);
+  /* Detail panel: wider, softer lavender/blue halo as in the Figma frame */
+  --service-detail-glow: 0 18px 60px rgba(110, 120, 225, 0.28);
 
   position: relative;
   overflow-x: hidden; /* clips the left-edge brain that extends off-screen */
@@ -157,8 +159,14 @@
   box-shadow: var(--service-glow-hover);
 }
 
-.services-page__tile[aria-pressed='true'] {
-  border-color: var(--color-card-lavender-accent);
+.services-page__tile:hover .services-page__tile-title {
+  color: var(--service-cta);
+}
+
+.services-page__tile:focus-visible,
+.services-page__request-button:focus-visible {
+  outline: 3px solid var(--service-cta);
+  outline-offset: 3px;
 }
 
 .services-page__tile-illustration {
@@ -169,7 +177,8 @@
 }
 
 /* Illustration images scale to their container and never overflow.
-   multiply drops the white image background so it blends with any surface. */
+   multiply drops the white image background so it blends with any surface
+   (needed because the detail illustration overhangs the card onto its lavender shadow). */
 .services-page__tile-illustration img,
 .services-page__detail-illustration img {
   display: block;
@@ -183,43 +192,72 @@
   font-weight: var(--fw-semibold);
   color: var(--color-text);
   line-height: 1.3;
+  transition: color var(--transition-base);
 }
 
 /* ── Selected service card ── */
+/* Figma: a centred panel (~70% of the page width) with large rounded corners, generous
+   padding, a big bold heading and loose body text. The illustration overhangs the
+   top-right corner, in front of the card. */
+
+/* The detail view replaces the tiles (as in the Figma prototype): heading, panel, CTA. */
+.services-page__detail-view {
+  width: 70%;
+  max-width: 1040px; /* video: panel is ~69% of a 1439px viewport (~997px), not capped at 800px */
+  margin: 0 auto;
+}
+
+.services-page__detail-header {
+  margin-bottom: 64px; /* room for the illustration that overhangs the card's top-right */
+  padding-left: 36px; /* video: heading starts ~37px inside the panel's left edge */
+  text-align: left;
+}
 
 .services-page__detail {
   position: relative;
-  margin-top: var(--space-16);
-  padding: var(--space-8);
+  view-transition-name: services-card; /* shared element: the clicked tile morphs into this panel */
+  min-height: 420px;
+  padding: 48px 86px 40px; /* video: title/body start ~86px inside the panel */
   background: #ffffff;
-  border-radius: var(--radius-card);
-  box-shadow: var(--service-glow);
+  border-radius: 40px;
+  box-shadow: var(--service-detail-glow);
 }
 
 .services-page__detail-illustration {
   position: absolute;
-  top: -72px;
-  right: var(--space-8);
-  width: 170px;
+  top: -92px;
+  right: -140px; /* video: art overhangs the right edge by ~140px and the top by ~93px */
+  z-index: 2; /* in front of the card */
+  width: 270px;
+  pointer-events: none;
+  view-transition-name: services-art; /* shared element: the clicked tile's illustration morphs into this */
 }
 
 .services-page__detail-title {
-  padding-right: 190px; /* keeps the title clear of the illustration */
-  font-size: var(--text-2xl);
+  padding-right: 120px; /* keeps the title clear of the illustration */
+  outline: none; /* focused programmatically on selection; not a tab stop */
+  font-size: clamp(2.25rem, 3.9vw, 3.5rem); /* video: ~56px at a 1439px viewport */
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000000;
   overflow-wrap: break-word;
 }
 
 .services-page__detail-description {
-  margin-top: var(--space-4);
-  font-size: var(--text-sm);
-  line-height: 1.8;
+  max-width: 800px;
+  margin-top: var(--space-8);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 2; /* video: ~32px line pitch */
   color: var(--color-text-body);
 }
 
+/* Figma: the CTA sits under the card, right-aligned near its edge */
 .services-page__detail-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: var(--space-8);
+  margin-top: var(--space-6);
+  padding-right: 8px;
 }
 
 .services-page__request-button {
@@ -239,6 +277,78 @@
 .services-page__request-button:hover {
   background: var(--service-cta-dark);
   transform: translateY(-2px);
+}
+
+/* ── Entrance animation ──
+   Reference video (see summary): clicking a tile morphs that tile into the detail panel and its
+   illustration into the large top-right illustration (~300ms), while the other tiles, the intro
+   and the rest of the page cross-fade out. That is done with the View Transitions API
+   (see the ::view-transition rules below); the <article> and its illustration carry the same
+   view-transition-names as the clicked tile.
+
+   The keyframes here are only the FALLBACK entrance (deep link, browser Back from /contact,
+   browsers without View Transitions). The morph path disables them with --morph.
+   fill-mode is "backwards" so no stacking context lingers after the animation. */
+
+@keyframes services-detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes services-illustration-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.services-page__detail-view {
+  animation: services-detail-in 320ms ease-out backwards;
+}
+
+.services-page__detail-illustration {
+  transform-origin: 60% 70%;
+  animation: services-illustration-in 460ms cubic-bezier(0.22, 1, 0.36, 1) 60ms backwards;
+}
+
+/* The tile list has no entrance animation: in the video, returning to it is an immediate swap. */
+
+.services-page__detail-view--morph,
+.services-page__detail-view--morph .services-page__detail-illustration {
+  animation: none;
+}
+
+/* View-transition pseudo-elements live on the document, so they are namespaced by name. */
+::view-transition-group(services-card),
+::view-transition-group(services-art) {
+  animation-duration: 340ms;
+  animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+}
+
+/* The illustration PNGs have white backgrounds; keep them blending (multiply) during the morph
+   so no white rectangle appears over the panel's lavender glow. */
+::view-transition-image-pair(services-art) {
+  isolation: auto;
+}
+
+::view-transition-old(services-art),
+::view-transition-new(services-art) {
+  mix-blend-mode: multiply;
 }
 
 /* ── Scroll-to-top control ── */
@@ -269,6 +379,34 @@
   height: 20px;
 }
 
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .services-page__detail-view,
+  .services-page__detail-illustration {
+    animation: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+
+  .services-page__tile,
+  .services-page__tile-title,
+  .services-page__request-button,
+  .services-page__back {
+    transition: none;
+  }
+
+  .services-page__tile:hover,
+  .services-page__request-button:hover,
+  .services-page__back:hover {
+    transform: none;
+  }
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 1280px) {
@@ -276,6 +414,24 @@
     width: 460px;
     left: -226px;
     top: 143px;
+  }
+
+  .services-page__detail-view {
+    width: 72%;
+  }
+
+  .services-page__detail {
+    padding: 44px 64px 36px;
+  }
+
+  .services-page__detail-illustration {
+    width: 230px;
+    top: -80px;
+    right: -100px;
+  }
+
+  .services-page__detail-title {
+    font-size: 2.75rem;
   }
 }
 
@@ -304,6 +460,33 @@
     width: 240px;
     top: 60px;
   }
+
+  /* Detail panel: full width, illustration pulled inside the container so it never overflows */
+  .services-page__detail-view {
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .services-page__detail-header {
+    padding-left: 0;
+  }
+
+  .services-page__detail {
+    min-height: 0;
+    padding: 40px 40px 32px;
+    border-radius: 32px;
+  }
+
+  .services-page__detail-illustration {
+    width: 200px;
+    top: -76px;
+    right: 0;
+  }
+
+  .services-page__detail-title {
+    padding-right: 190px;
+    font-size: 2rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -327,29 +510,40 @@
     width: 140px;
   }
 
+  .services-page__detail-header {
+    margin-bottom: 72px;
+  }
+
   .services-page__detail {
-    margin-top: var(--space-12);
-    padding: var(--space-6) var(--space-5);
+    padding: 32px 20px 24px;
+    border-radius: 24px;
   }
 
   .services-page__detail-illustration {
-    top: -48px;
-    right: var(--space-5);
-    width: 110px;
+    top: -60px;
+    right: 8px;
+    width: 130px;
   }
 
   .services-page__detail-title {
     padding-right: 120px;
-    font-size: var(--text-xl);
+    font-size: 1.5rem;
+  }
+
+  .services-page__detail-description {
+    margin-top: var(--space-5);
+    line-height: 1.8;
   }
 
   .services-page__detail-footer {
     justify-content: stretch;
+    padding-right: 0;
   }
 
   .services-page__request-button {
     justify-content: center;
     width: 100%;
+    min-height: 44px; /* comfortable touch target */
   }
 
   .services-page__brain-wrap {
