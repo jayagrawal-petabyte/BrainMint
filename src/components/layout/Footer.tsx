@@ -7,7 +7,7 @@ import phoneIcon from '../../assets/contact/bx_phone-call.png'
 import addressIcon from '../../assets/contact/Group 2.png'
 import styles from './Footer.module.css'
 
-const ADDRESS = 'SRM Nagar, Potheri, Kattankulathur – 603203, Chengalpattu District, Tamil Nadu, India'
+const ADDRESS = '21/18, 1st Cross St, Vengeeswarar Nagar, Vadapalani, Chennai - 600026'
 
 const SOCIAL_LINKS = [
   { label: 'Instagram', href: '#', icon: instagramIcon },
@@ -24,7 +24,7 @@ export default function Footer() {
           <h2 id="locations-title" className={styles.title}>Locations</h2>
           <div className={styles.detail}>
             <img src={addressIcon} alt="" className={styles.detailIcon} />
-            <a href="https://maps.google.com/?q=SRM+Nagar+Potheri+Kattankulathur" target="_blank" rel="noreferrer">
+            <a href="https://maps.app.goo.gl/TkkXJ2Cirnf75bNPA" target="_blank" rel="noreferrer">
               {ADDRESS}
             </a>
           </div>
@@ -34,11 +34,11 @@ export default function Footer() {
           <h2 id="contact-title" className={styles.title}>Contact</h2>
           <div className={styles.detail}>
             <img src={mailIcon} alt="" className={styles.detailIcon} />
-            <a href="mailto:brainmint@gmail.com">Brainmint@gmail.com</a>
+            <a href="mailto:brainmintacademy@gmail.com">brainmintacademy@gmail.com</a>
           </div>
           <div className={styles.detail}>
             <img src={phoneIcon} alt="" className={styles.detailIcon} />
-            <a href="tel:12345678902">12345678902</a>
+            <a href="tel:+91 97892 50201">+91 97892 50201</a>
           </div>
         </section>
 
