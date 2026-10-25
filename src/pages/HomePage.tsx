@@ -191,7 +191,7 @@ export default function HomePage() {
         </div>
 
         <div className={styles.serviceButtonWrapper}>
-          <Link to="/service" className={styles.serviceButton}>
+          <Link to="/services" className={styles.serviceButton}>
             Request a Service
           </Link>
         </div>

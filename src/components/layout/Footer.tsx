@@ -38,7 +38,9 @@ export default function Footer() {
           </div>
           <div className={styles.detail}>
             <img src={phoneIcon} alt="" className={styles.detailIcon} />
-            <a href="tel:+91 97892 50201">+91 97892 50201</a>
+            <a href="tel:+91 97892 50201git switch frontend
+git status
+git pull --rebase origin frontend">+91 97892 50201</a>
           </div>
         </section>
 
