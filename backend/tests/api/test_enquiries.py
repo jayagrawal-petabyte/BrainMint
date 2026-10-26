@@ -294,6 +294,38 @@ class TestContactEnquirySubmit:
         ))
         assert res.status_code == 422
 
+    def test_contact_submission_without_captcha_token_succeeds(self, client: TestClient, db: Session):
+        payload = _valid_contact_payload(email="notoken@example.com")
+        del payload["captcha_token"]
+        with patch("app.services.email_service.email_service.send_enquiry_notification"), \
+             patch("app.services.email_service.email_service.send_enquiry_acknowledgement"):
+            res = client.post(CONTACT_URL, json=payload)
+        assert res.status_code == 201
+        assert res.json()["success"] is True
+
+    def test_contact_submission_fails_when_captcha_enabled_and_token_missing(self, client_no_mock: TestClient, db: Session):
+        payload = _valid_contact_payload(email="token_missing_fail@example.com")
+        del payload["captcha_token"]
+        from app.services.captcha_service import CaptchaService, captcha_service
+        with patch("app.core.config.settings.CAPTCHA_ENABLED", True), \
+             patch.object(captcha_service, "verify", side_effect=CaptchaService.verify.__get__(captcha_service)):
+            res = client_no_mock.post(CONTACT_URL, json=payload)
+        assert res.status_code == 422
+        assert res.json()["error"]["code"] == "CAPTCHA_FAILED"
+
+    def test_contact_submission_succeeds_when_captcha_disabled(self, client_no_mock: TestClient, db: Session):
+        payload = _valid_contact_payload(email="captcha_disabled@example.com")
+        del payload["captcha_token"]
+        from app.services.captcha_service import CaptchaService, captcha_service
+        with patch("app.core.config.settings.CAPTCHA_ENABLED", False), \
+             patch.object(captcha_service, "verify", side_effect=CaptchaService.verify.__get__(captcha_service)), \
+             patch("app.services.email_service.email_service.send_enquiry_notification"), \
+             patch("app.services.email_service.email_service.send_enquiry_acknowledgement"):
+            res = client_no_mock.post(CONTACT_URL, json=payload)
+        assert res.status_code == 201
+        assert res.json()["success"] is True
+
+
 
 # ===========================================================================
 # Admin endpoints

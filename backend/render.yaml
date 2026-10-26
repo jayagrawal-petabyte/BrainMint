@@ -39,5 +39,7 @@ services:
         sync: false
       - key: SMTP_PASSWORD
         sync: false
+      - key: CAPTCHA_ENABLED
+        value: "false"
       - key: CAPTCHA_SECRET_KEY
         sync: false

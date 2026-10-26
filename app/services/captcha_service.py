@@ -7,7 +7,7 @@ Set CAPTCHA_ENABLED=false to bypass verification in local dev / tests.
 """
 
 import logging
-from typing import Literal
+from typing import Literal, Optional
 
 import httpx
 
@@ -32,7 +32,11 @@ class CaptchaService:
         self.secret: str = getattr(settings, "CAPTCHA_SECRET_KEY", "")
         self.min_score: float = float(getattr(settings, "RECAPTCHA_MIN_SCORE", 0.5))
 
-    def verify(self, token: str, ip: str | None = None) -> None:
+    @property
+    def is_enabled(self) -> bool:
+        return getattr(settings, "CAPTCHA_ENABLED", self.enabled)
+
+    def verify(self, token: Optional[str] = None, ip: str | None = None) -> None:
         """
         Verify a CAPTCHA token with the provider's siteverify endpoint.
 
@@ -41,9 +45,12 @@ class CaptchaService:
         CaptchaVerificationError
             If the token is invalid, expired, or scores below threshold.
         """
-        if not self.enabled:
+        if not self.is_enabled:
             logger.debug("CAPTCHA verification disabled – skipping.")
             return
+
+        if not token:
+            raise CaptchaVerificationError("CAPTCHA token is required when CAPTCHA is enabled.")
 
         if not self.secret:
             logger.warning(

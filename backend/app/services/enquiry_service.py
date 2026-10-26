@@ -38,7 +38,7 @@ class EnquiryService:
         message: str,
         source: EnquirySource,
         ip_address: Optional[str],
-        captcha_token: str,
+        captcha_token: Optional[str] = None,
         background_tasks: Optional[BackgroundTasks] = None,
     ) -> tuple[Enquiry, bool]:
         """
@@ -69,23 +69,26 @@ class EnquiryService:
                 )
 
         # ------------------------------------------------------------------
-        # Step 2 – CAPTCHA verification
+        # Step 2 – CAPTCHA verification (skipped when CAPTCHA_ENABLED is false)
         # ------------------------------------------------------------------
-        try:
-            captcha_service.verify(captcha_token, ip=ip_address)
-        except CaptchaVerificationError as exc:
-            from fastapi import HTTPException, status
-            raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail={
-                    "success": False,
-                    "error": {
-                        "code": "CAPTCHA_FAILED",
-                        "message": str(exc),
-                        "details": [{"field": "captcha_token", "message": str(exc)}],
+        from app.core.config import settings
+
+        if getattr(settings, "CAPTCHA_ENABLED", True):
+            try:
+                captcha_service.verify(captcha_token, ip=ip_address)
+            except CaptchaVerificationError as exc:
+                from fastapi import HTTPException, status
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    detail={
+                        "success": False,
+                        "error": {
+                            "code": "CAPTCHA_FAILED",
+                            "message": str(exc),
+                            "details": [{"field": "captcha_token", "message": str(exc)}],
+                        },
                     },
-                },
-            ) from exc
+                ) from exc
 
         # ------------------------------------------------------------------
         # Step 3 – Persist to DB (idempotency guard inside)

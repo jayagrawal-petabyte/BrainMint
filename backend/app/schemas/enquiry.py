@@ -40,7 +40,7 @@ class ServiceEnquiryCreate(BaseModel):
     message: str = Field(..., min_length=10, max_length=3000)
 
     # Anti-spam fields
-    captcha_token: str = Field(..., description="hCaptcha / reCAPTCHA response token")
+    captcha_token: Optional[str] = Field(None, description="hCaptcha / reCAPTCHA response token")
     honeypot: Optional[str] = Field(None, description="Must be empty – bot trap")
 
     @field_validator("name", "message", mode="before")
@@ -90,7 +90,7 @@ class ContactEnquiryCreate(BaseModel):
     message: str = Field(..., min_length=10, max_length=3000)
 
     # Anti-spam
-    captcha_token: str = Field(..., description="hCaptcha / reCAPTCHA response token")
+    captcha_token: Optional[str] = Field(None, description="hCaptcha / reCAPTCHA response token")
     honeypot: Optional[str] = Field(None, description="Must be empty – bot trap")
 
     @field_validator("name", "message", mode="before")
