@@ -4,6 +4,7 @@
   --green: #16b83e;
   --outline-green: #52d67b;
   --text: #151515;
+
   position: relative;
   width: 100%;
   min-height: calc(100vh - 220px);
@@ -18,7 +19,7 @@
   box-sizing: border-box;
 }
 
-/* === Pink Back Button === */
+/* Back button */
 .contact-back {
   position: absolute;
   top: 20px;
@@ -44,7 +45,7 @@
   background: #db5980;
 }
 
-/* === Title & Subtitle Intro === */
+/* Intro heading */
 .contact-intro {
   position: relative;
   z-index: 2;
@@ -69,7 +70,7 @@
   color: #1a1a1a;
 }
 
-/* === Content Wrapper === */
+/* Main content */
 .contact-content {
   position: relative;
   width: 100%;
@@ -79,7 +80,7 @@
   padding: 0 24px;
 }
 
-/* === Left Origami Graphic === */
+/* Origami artwork */
 .contact-art {
   position: absolute;
   top: 10px;
@@ -96,7 +97,7 @@
   display: block;
 }
 
-/* === Form Card Section === */
+/* Form area */
 .contact-form-area {
   position: relative;
   z-index: 2;
@@ -123,7 +124,7 @@
   color: #151515;
 }
 
-/* === Form Fields === */
+/* Form fields */
 .contact-fields {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -178,12 +179,12 @@
   resize: vertical;
 }
 
-/* === Send Message Button (Outside below the card) === */
+/* Submit button */
 .contact-submit {
   display: block;
   min-width: 190px;
-  height: 42px;
-  padding: 0 36px;
+  min-height: 42px;
+  padding: 10px 36px;
   margin: 28px auto 0;
   border: none;
   border-radius: 12px;
@@ -196,12 +197,48 @@
   transition: background 0.2s ease, transform 0.18s ease;
 }
 
-.contact-submit:hover {
+.contact-submit:hover:not(:disabled) {
   background: #13a934;
   transform: translateY(-1px);
 }
 
-/* === Submitted State Inside Card === */
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+  transform: none;
+}
+
+/* API errors */
+.contact-api-error {
+  margin: 16px 0 0;
+  padding: 11px 13px;
+  border: 1px solid #f0b5b5;
+  border-radius: 8px;
+  background: #fff5f5;
+  color: #a32121;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Hidden honeypot spam-trap field */
+.contact-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Success card text */
 .contact-submitted-text {
   margin: 20px 0 28px;
   color: #555e6d;
@@ -210,7 +247,7 @@
   font-weight: 500;
 }
 
-/* === Submission Success Section Below Card === */
+/* Thank-you section */
 .thank-you-area {
   margin-top: 36px;
   text-align: center;
@@ -226,6 +263,7 @@
   text-transform: uppercase;
 }
 
+/* Explore button */
 .explore-more-btn {
   display: inline-block;
   padding: 11px 36px;
@@ -247,11 +285,18 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* === Floating Scroll-To-Top Button === */
+/* Scroll-to-top button */
 .contact-scroll-top {
   position: fixed;
   right: 28px;
@@ -276,6 +321,7 @@
   transform: translateY(-2px);
 }
 
+/* Responsive layout */
 @media (max-width: 768px) {
   .contact-fields {
     grid-template-columns: 1fr;
@@ -288,5 +334,18 @@
 
   .contact-card {
     padding: 24px 20px;
+  }
+
+  .contact-content {
+    padding: 0 16px;
+  }
+
+  .contact-intro {
+    margin-top: 24px;
+  }
+
+  .contact-scroll-top {
+    right: 16px;
+    bottom: 16px;
   }
 }
