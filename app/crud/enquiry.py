@@ -17,6 +17,7 @@ from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Tuple
 
 from sqlalchemy import and_, or_
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.models.enquiry import (
@@ -87,6 +88,14 @@ class CRUDEnquiry:
             )
             return existing, True
 
+        # idempotency_key is UNIQUE. An identical submission from OUTSIDE the
+        # window is a legitimate new enquiry, so free the key on the old row
+        # first; otherwise the INSERT below would fail with a 500.
+        stale = db.query(Enquiry).filter(Enquiry.idempotency_key == ikey).first()
+        if stale:
+            stale.idempotency_key = None
+            db.flush()
+
         enquiry = Enquiry(
             name=name,
             email=email,
@@ -100,7 +109,15 @@ class CRUDEnquiry:
             email_status=EmailStatus.pending,
         )
         db.add(enquiry)
-        db.commit()
+        try:
+            db.commit()
+        except IntegrityError:
+            # Two identical requests raced (e.g. double-click): the other one won.
+            db.rollback()
+            winner = db.query(Enquiry).filter(Enquiry.idempotency_key == ikey).first()
+            if winner:
+                return winner, True
+            raise
         db.refresh(enquiry)
         return enquiry, False
 
