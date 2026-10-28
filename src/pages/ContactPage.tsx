@@ -40,7 +40,7 @@ const initialForm: ContactForm = {
 
 const API_BASE_URL = (
   import.meta.env.VITE_API_BASE_URL ||
-  'https://website-l9pp.onrender.com/api/v1'
+  'https://brainmint-b9xj.onrender.com/api/v1'
 ).replace(/\/+$/, '');
 
 const DEFAULT_SUCCESS_MESSAGE =
@@ -130,19 +130,18 @@ export default function ContactPage() {
 
     try {
       const response = await fetch(`${API_BASE_URL}/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          message,
-          honeypot: '',
-        }),
-      });
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name,
+    email,
+    phone,
+    message,
+    honeypot: '',
+  }),
+});
 
       const result = (await response
         .json()
