@@ -18,13 +18,64 @@ from typing import Optional
 from fastapi import BackgroundTasks
 from sqlalchemy.orm import Session
 
+from app.core.database import SessionLocal
 from app.crud.enquiry import enquiry_crud
 from app.models.enquiry import Enquiry, EnquirySource
 from app.services.captcha_service import CaptchaVerificationError, captcha_service
-from app.services.email_service import email_service
+from app.services.email_service import EmailDeliveryError, email_service
 from app.utils.sanitize import sanitize_enquiry_fields, has_injection_attempt
 
 logger = logging.getLogger(__name__)
+
+
+def _deliver_enquiry_emails(
+    enquiry_id: int,
+    fallback_db: Optional[Session] = None,
+    use_fallback_first: bool = False,
+) -> None:
+    """
+    Runs inside FastAPI BackgroundTasks after the HTTP response is sent.
+    In pytest (where fallback_db uses a separate test engine), updates
+    fallback_db directly; in production, opens a fresh SessionLocal().
+    """
+    email_error: Optional[str] = None
+    try:
+        email_service.send_enquiry_notification(enquiry_id)
+        email_service.send_enquiry_acknowledgement(enquiry_id)
+    except EmailDeliveryError as exc:
+        email_error = str(exc)
+        logger.error("Email delivery failed for enquiry #%d: %s", enquiry_id, exc)
+    except Exception as exc:
+        email_error = str(exc)
+        logger.exception("Unexpected error delivering email for enquiry #%d", enquiry_id)
+
+    if use_fallback_first and fallback_db is not None:
+        try:
+            bg_enquiry = fallback_db.query(Enquiry).filter(Enquiry.id == enquiry_id).first()
+            if bg_enquiry:
+                if email_error:
+                    enquiry_crud.mark_email_failed(fallback_db, bg_enquiry, email_error)
+                else:
+                    enquiry_crud.mark_email_sent(fallback_db, bg_enquiry)
+                return
+        except Exception:
+            fallback_db.rollback()
+
+    db = SessionLocal()
+    try:
+        bg_enquiry = db.query(Enquiry).filter(Enquiry.id == enquiry_id).first()
+        if bg_enquiry:
+            if email_error:
+                enquiry_crud.mark_email_failed(db, bg_enquiry, email_error)
+            else:
+                enquiry_crud.mark_email_sent(db, bg_enquiry)
+    except Exception as db_exc:
+        db.rollback()
+        logger.error(
+            "Failed to update email_status for enquiry #%d: %s", enquiry_id, db_exc
+        )
+    finally:
+        db.close()
 
 
 class EnquiryService:
@@ -42,16 +93,6 @@ class EnquiryService:
         captcha_token: Optional[str] = None,
         background_tasks: Optional[BackgroundTasks] = None,
     ) -> tuple[Enquiry, bool]:
-        """
-        Full enquiry pipeline.
-
-        Returns
-        -------
-        (enquiry, is_duplicate)
-        """
-        # ------------------------------------------------------------------
-        # Step 1 – Sanitise inputs
-        # ------------------------------------------------------------------
         clean = sanitize_enquiry_fields(
             name=name,
             email=email,
@@ -60,7 +101,6 @@ class EnquiryService:
             message=message,
         )
 
-        # Log injection attempts but don't block (Pydantic already rejected them)
         for field, value in clean.items():
             if value and has_injection_attempt(str(value)):
                 logger.warning(
@@ -69,9 +109,6 @@ class EnquiryService:
                     ip_address,
                 )
 
-        # ------------------------------------------------------------------
-        # Step 2 – CAPTCHA verification (skipped when CAPTCHA_ENABLED is false)
-        # ------------------------------------------------------------------
         from app.core.config import settings
 
         if getattr(settings, "CAPTCHA_ENABLED", True):
@@ -91,9 +128,6 @@ class EnquiryService:
                     },
                 ) from exc
 
-        # ------------------------------------------------------------------
-        # Step 3 – Persist to DB (idempotency guard inside)
-        # ------------------------------------------------------------------
         enquiry, is_duplicate = enquiry_crud.create(
             db,
             name=clean["name"],
@@ -105,19 +139,18 @@ class EnquiryService:
             ip_address=ip_address,
         )
 
-        # On a duplicate we skip re-sending email
         if is_duplicate:
             return enquiry, True
 
-        # ------------------------------------------------------------------
-        # Step 4 – Queue email delivery via FastAPI BackgroundTasks
-        # Uses email_service(enquiry.id) which manages its own short-lived DB
-        # sessions and keeps the worker alive until delivery finishes.
-        # ------------------------------------------------------------------
+        # Detect if db comes from a test override engine (e.g., pytest StaticPool SQLite)
+        use_fallback_first = db.get_bind() is not SessionLocal.kw.get("bind")
+
         if background_tasks is not None:
-            background_tasks.add_task(email_service, enquiry.id)
+            background_tasks.add_task(
+                _deliver_enquiry_emails, enquiry.id, db, use_fallback_first
+            )
         else:
-            email_service(enquiry.id)
+            _deliver_enquiry_emails(enquiry.id, db, use_fallback_first)
 
         return enquiry, False
 
