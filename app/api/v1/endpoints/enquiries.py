@@ -1,15 +1,8 @@
 """
 POST /api/v1/enquiries  – Service Enquiry Form (SCR-012)
-
-Anti-spam stack (applied in order):
-  1. Rate limiting     – 5 requests per IP per 60 s
-  2. Honeypot field    – validated inside the Pydantic schema
-  3. CAPTCHA           – hCaptcha / reCAPTCHA via captcha_service
-  4. Server-side validation – Pydantic with field-level errors (SCR-014)
-  5. Input sanitisation – HTML/XSS stripping before DB write
 """
 
-from fastapi import APIRouter, Depends, Request, status
+from fastapi import APIRouter, BackgroundTasks, Depends, Request, status
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
@@ -17,16 +10,13 @@ from sqlalchemy.orm import Session
 from app.api.deps import get_db
 from app.core.rate_limit import enquiry_limiter, get_client_ip
 from app.models.enquiry import EnquirySource
-from app.schemas.enquiry import ServiceEnquiryCreate, EnquiryResponse
+from app.schemas.enquiry import ServiceEnquiryCreate
 from app.services.enquiry_service import enquiry_service
 
 router = APIRouter()
 
 
 def _format_validation_errors(exc: ValidationError) -> JSONResponse:
-    """
-    Convert Pydantic v2 ValidationError into the SCR-014 field-level error envelope.
-    """
     details = []
     for err in exc.errors(include_url=False):
         field = ".".join(str(loc) for loc in err["loc"]) if err["loc"] else "body"
@@ -53,23 +43,12 @@ def _format_validation_errors(exc: ValidationError) -> JSONResponse:
 )
 async def submit_service_enquiry(
     request: Request,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
 ):
-    """
-    **POST /api/v1/enquiries**
-
-    Accepts the Service Enquiry Form payload.  Returns a consistent
-    success envelope (SCR-013) on success, or a field-level error
-    envelope (SCR-014) on validation failure.
-
-    Anti-spam: rate-limited per IP, honeypot field checked inside schema,
-    CAPTCHA token verified server-side.
-    """
-    # --- Rate limit check ---
     client_ip = get_client_ip(request)
     enquiry_limiter.check(client_ip)
 
-    # --- Parse & validate body ---
     try:
         raw = await request.json()
         payload = ServiceEnquiryCreate(**raw)
@@ -88,7 +67,6 @@ async def submit_service_enquiry(
             },
         )
 
-    # --- Business logic (sanitise → captcha → DB → email) ---
     enquiry, is_duplicate = enquiry_service.process_submission(
         db,
         name=payload.name,
@@ -99,6 +77,7 @@ async def submit_service_enquiry(
         source=EnquirySource.service_enquiry,
         ip_address=client_ip,
         captcha_token=payload.captcha_token,
+        background_tasks=background_tasks,
     )
 
     http_status = status.HTTP_200_OK if is_duplicate else status.HTTP_201_CREATED

@@ -1,18 +1,8 @@
 """
 POST /api/v1/contact  – Contact Us Form (SCR-008)
-
-Identical anti-spam stack to /api/v1/enquiries:
-  1. Rate limiting     – 5 requests per IP per 60 s
-  2. Honeypot field    – validated inside the Pydantic schema
-  3. CAPTCHA           – hCaptcha / reCAPTCHA via captcha_service
-  4. Server-side validation – Pydantic with field-level errors (SCR-014)
-  5. Input sanitisation – HTML/XSS stripping before DB write
-
-The contact form does not require a service selection and uses
-EnquirySource.contact_us so admin can filter by origin.
 """
 
-from fastapi import APIRouter, Depends, Request, status
+from fastapi import APIRouter, BackgroundTasks, Depends, Request, status
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
@@ -53,15 +43,9 @@ def _format_validation_errors(exc: ValidationError) -> JSONResponse:
 )
 async def submit_contact_enquiry(
     request: Request,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
 ):
-    """
-    **POST /api/v1/contact**
-
-    Accepts the Contact Us form payload.  No service selection required.
-    Returns a consistent success envelope (SCR-013) on success, or a
-    field-level error envelope (SCR-014) on validation failure.
-    """
     client_ip = get_client_ip(request)
     enquiry_limiter.check(client_ip)
 
@@ -88,11 +72,12 @@ async def submit_contact_enquiry(
         name=payload.name,
         email=str(payload.email),
         phone=payload.phone,
-        service=None,            # Contact Us has no service field
+        service=None,
         message=payload.message,
         source=EnquirySource.contact_us,
         ip_address=client_ip,
         captcha_token=payload.captcha_token,
+        background_tasks=background_tasks,
     )
 
     http_status = status.HTTP_200_OK if is_duplicate else status.HTTP_201_CREATED
