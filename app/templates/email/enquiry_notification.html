@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Enquiry – BrainMint</title>
+  <style>
+    body { margin: 0; padding: 0; background: #f4f6fa; font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a2e; }
+    .wrapper { max-width: 640px; margin: 32px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%); padding: 36px 40px; text-align: center; }
+    .header h1 { margin: 0; color: #e94560; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
+    .header p  { margin: 8px 0 0; color: #a8b2d8; font-size: 14px; }
+    .badge { display: inline-block; background: #e94560; color: #fff; border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 600; margin-top: 12px; }
+    .body { padding: 36px 40px; }
+    .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .meta-item { background: #f8f9fc; border-radius: 8px; padding: 14px 16px; }
+    .meta-item .label { font-size: 11px; font-weight: 600; color: #6c7a9c; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .meta-item .value { font-size: 15px; color: #1a1a2e; font-weight: 500; word-break: break-all; }
+    .message-box { background: #f0f2f8; border-left: 4px solid #e94560; border-radius: 0 8px 8px 0; padding: 18px 20px; margin-top: 8px; }
+    .message-box .label { font-size: 11px; font-weight: 600; color: #6c7a9c; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .message-box .value { font-size: 15px; color: #1a1a2e; line-height: 1.6; white-space: pre-wrap; }
+    .action-btn { display: block; width: fit-content; margin: 28px auto 0; background: #e94560; color: #fff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 15px; text-align: center; }
+    .footer { background: #f8f9fc; padding: 20px 40px; text-align: center; font-size: 12px; color: #6c7a9c; border-top: 1px solid #e8ecf4; }
+    .footer a { color: #e94560; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <h1>🔔 New Enquiry Received</h1>
+      <p>A visitor has submitted a form on BrainMint Software</p>
+      <span class="badge">Enquiry #{{enquiry_id}}</span>
+    </div>
+
+    <div class="body">
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="label">Name</div>
+          <div class="value">{{name}}</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Email</div>
+          <div class="value">{{email}}</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Phone</div>
+          <div class="value">{{phone}}</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Service Interest</div>
+          <div class="value">{{service}}</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Form Source</div>
+          <div class="value">{{source}}</div>
+        </div>
+      </div>
+
+      <div class="message-box">
+        <div class="label">Message</div>
+        <div class="value">{{message}}</div>
+      </div>
+
+      <a class="action-btn" href="mailto:{{email}}?subject=Re:%20Your%20BrainMint%20Enquiry">
+        Reply to {{name}}
+      </a>
+    </div>
+
+    <div class="footer">
+      This email was sent automatically by <a href="https://brainmint.com">brainmint.com</a>.
+      Do not reply to this address.
+    </div>
+  </div>
+</body>
+</html>
